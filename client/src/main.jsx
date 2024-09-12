@@ -7,6 +7,7 @@ import './index.css'
 
 import App from './App.jsx'
 import HomePage from './pages/HomePage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import NoMatch from './pages/NoMatch.jsx'
 //import TitlePage from './pages/TitlePage.jsx'
@@ -22,10 +23,10 @@ const router = createBrowserRouter([
         index: true, 
         element: <HomePage />
       }, 
-      // {
-      //   path: '/login',
-      //   element: <Login />
-      // }, 
+      {
+        path: '/login',
+        element: <LoginPage />
+      }, 
       {
         path: '/signup',
         element: <SignupPage />
