@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom'; // Import useParams
 import { Container, Header, Button, Grid, Segment } from 'semantic-ui-react';
 
 // Mock data for environments and pens with costs and earnings
@@ -13,8 +14,8 @@ const environments = {
   // Add other environments similarly
 };
 
-const EnvironmentPage = ({ match }) => {
-  const { environment } = match.params; // Get the environment from the URL
+const EnvironmentPage = () => {
+  const { environment } = useParams(); // Get the environment name from the URL
   const [money, setMoney] = useState(50); // Starting with $50
   const [pens, setPens] = useState(environments[environment].pens); // Pens for the current environment
 
@@ -48,7 +49,7 @@ const EnvironmentPage = ({ match }) => {
             <Segment>
               <Header as="h4">{pen.name} Pen</Header>
               {pen.unlocked ? (
-                <p>{pen.name} generate ${pen.earnings} per second</p>
+                <p>{pen.name} generates ${pen.earnings} per second</p>
               ) : (
                 <Button
                   color="green"
