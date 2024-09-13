@@ -176,6 +176,8 @@ const EnvironmentPage = () => {
               {/* If the pen is unlocked, show buy animals option, otherwise show unlock option */}
               {pen.unlocked ? (
                 <>
+                <div className="background-container">
+                  <img className="background" src='/images/set/forest.png'/>
                   <div className="pen-container">
                     <img className="pen" src="/images/set/pen.png" />
                     <div id="pen-sprites">
@@ -191,7 +193,7 @@ const EnvironmentPage = () => {
                       )}
                     </div>
                   </div>
-
+                </div>
                   <p>
                     {pen.name} generates ${pen.earnings} per second
                   </p>
@@ -215,22 +217,22 @@ const EnvironmentPage = () => {
 
       {/* Generate earnings per click for Environments */}
       {id === "1" && (
-        <Button color="blue" onClick={() => setMoney(money + 1)}>
+        <Button color="blue" onClick={() => setMoney(money + 100)}>
           Click to earn $1 from the Forest
         </Button>
       )}
       {id === "2" && (
-        <Button color="blue" onClick={() => setMoney(money + 5)}>
+        <Button color="blue" onClick={() => setMoney(money + 500)}>
           Click to earn $5 from the Avian Environment
         </Button>
       )}
       {id === '3' && (
-        <Button color="blue" onClick={() => setMoney(money + 10)}>
+        <Button color="blue" onClick={() => setMoney(money + 1000)}>
           Click to earn $10 from the Arctic Environment
         </Button>
       )}
       {id === '4' && (
-        <Button color="blue" onClick={() => setMoney(money + 50)}>
+        <Button color="blue" onClick={() => setMoney(money + 500)}>
           Click to earn $50 from the Savanna Environment
         </Button>
       )}
