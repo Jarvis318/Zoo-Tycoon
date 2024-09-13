@@ -10,7 +10,7 @@ import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import NoMatch from './pages/NoMatch.jsx'
-//import TitlePage from './pages/TitlePage.jsx'
+// import TitlePage from './pages/TitlePage.jsx'
 import EnvironmentPage from './pages/EnvironmentPage.jsx'
 
 const router = createBrowserRouter([
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       //   element: <TitlePage />
       // }, 
       {
-        path: '/environment/:name', //TODO: Change path later
+        path: '/environment/:id', //TODO: Change path later
         element: <EnvironmentPage /> 
       }
     ]
