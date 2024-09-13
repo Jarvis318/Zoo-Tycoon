@@ -12,7 +12,7 @@ const environmentsData = [
 ];
 
 const HomePage = () => {
-  const [money, setMoney] = useState(500); // Starting money
+  const [money, setMoney] = useState(1000); // Starting money
   const [environments, setEnvironments] = useState(environmentsData); // Track environment unlocks
 
   // Handle unlocking an environment
