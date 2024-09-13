@@ -10,8 +10,8 @@ import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import NoMatch from './pages/NoMatch.jsx'
-//import TitlePage from './pages/TitlePage.jsx'
-//import EnvironmentPage from './pages/EnvironmnetPage.jsx'
+// import TitlePage from './pages/TitlePage.jsx'
+import EnvironmentPage from './pages/EnvironmentPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -35,10 +35,10 @@ const router = createBrowserRouter([
       //   path: '/success',  //TODO: Change Page
       //   element: <TitlePage />
       // }, 
-      // {
-      //   path: '/products/:id', //TODO: Change path later
-      //   element: <EnvironmentPage /> 
-      // }
+      {
+        path: '/environment/:id', //TODO: Change path later
+        element: <EnvironmentPage /> 
+      }
     ]
   }
 ]);
