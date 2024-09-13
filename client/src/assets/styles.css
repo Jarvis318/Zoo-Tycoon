@@ -12,6 +12,22 @@
     align-items: center;
     min-height: 256px;
 }
+
+
+
+.turtles{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+#pen-sprites{
+    height: 100%;
+    display: grid;
+    gap:10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
+}
+
 .pen {
     image-rendering: pixelated;
     position: absolute;
@@ -21,18 +37,3 @@
     height: 100%;
     object-fit: contain;
 };
-
-.turtles {
-    image-rendering: pixelated;    
-    height:64px;
-}
-
-.pen-sprites{
-    display: grid;
-    justify-items: center;
-    width:90%;
-    height:90%;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr ;
-    margin: 8px;
-}
