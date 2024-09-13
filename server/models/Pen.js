@@ -8,6 +8,7 @@ const penSchema = new Schema({
   environment: {
     type: Schema.Types.ObjectId,
     ref: 'Environment',
+    required: true,
   },
   animals: [{
     type: Schema.Types.ObjectId,

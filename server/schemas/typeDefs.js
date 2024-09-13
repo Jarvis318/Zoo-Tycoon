@@ -39,6 +39,10 @@ const typeDefs = `
 
   type Query {
     getUser: User
+    getEnvironment(name: String!): Environment
+    getAnimal: [Animal] 
+    getPen(name: String!, environment: ID): Pen
+    getAllPens: [Pen]
   }
 
 
