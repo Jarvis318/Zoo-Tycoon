@@ -16,6 +16,7 @@ const environments = {
 
 const EnvironmentPage = () => {
   const { environment } = useParams(); // Get the environment name from the URL
+  console.log(environment)
   const [money, setMoney] = useState(50); // Starting with $50
   const [pens, setPens] = useState(environments[environment].pens); // Pens for the current environment
 

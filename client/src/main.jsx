@@ -35,10 +35,10 @@ const router = createBrowserRouter([
       //   path: '/success',  //TODO: Change Page
       //   element: <TitlePage />
       // }, 
-      // {
-      //   path: '/environment/:name', //TODO: Change path later
-      //   element: <EnvironmentPage /> 
-      // }
+      {
+        path: '/environment/:name', //TODO: Change path later
+        element: <EnvironmentPage /> 
+      }
     ]
   }
 ]);
