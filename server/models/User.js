@@ -21,16 +21,26 @@ const userSchema = new Schema({
   },
   currency: {
     type: Number,
-    default: 0,
+    default: 50,
   },
-  unlockedPens: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Pen',
-  }],
-  unlockedAnimals: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Animal',
-  }],
+  unlockedEnvironments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Environment',
+    },
+  ],
+  unlockedPens: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Pen',
+    }
+  ],
+  unlockedAnimals: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Animal',
+    }
+  ],
 });
 
 userSchema.pre('save', async function (next) {
