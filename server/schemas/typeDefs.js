@@ -49,6 +49,12 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addEnvironment(name: String!, unlocked: Boolean): Environment
+    addPen(name: String!, unlocked: Boolean): Pen
+    updateUser(currency: Int): User
+    updateEnvironment(unlocked: Boolean): Environment
+    updatePen(unlocked: Boolean): Pen
+    updateAnimal(_id:ID, quantity: Int): Animal
   }
 `;
 module.exports = typeDefs;

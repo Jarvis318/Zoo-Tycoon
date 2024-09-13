@@ -1,31 +1,31 @@
 // import user model
-const { User, Animal, Environment, Pen} = require('../models');
+const { User, Animal, Environment, Pen } = require('../models');
 // import sign token function from auth
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
         // get a single user by either their id or their username
-        getUser: async(parent,args,context) => {
-            if(context.user) {
-            const foundUser = await User.findOne({
-                _id: context.user._id
-            });
+        // getUser: async (parent, args, context) => {
+        //     if (context.user) {
+        //         const foundUser = await User.findOne({
+        //             _id: context.user._id
+        //         });
 
-            return foundUser
-        }
-        throw AuthenticationError;
-        },
-        getUser: async(parent,args,context) => {
-            if(context.user) {
-            const foundUser = await User.findById(context.user._id).populate('unlockedPens');
+        //         return foundUser
+        //     }
+        //     throw AuthenticationError;
+        // },
+        getUser: async (parent, args, context) => {
+            if (context.user) {
+                const foundUser = await User.findById(context.user._id).populate('unlockedPens');
 
-            return foundUser
-        }
-        throw AuthenticationError;
+                return foundUser
+            }
+            throw AuthenticationError;
         },
-        getEnvironment: async(parent, args, context) => {
-            if(context.environment) {
+        getEnvironment: async (parent, args, context) => {
+            if (context.user) {
                 const foundEnvironment = await Environment.findOne({
                     _id: context.environment._id
                 });
@@ -43,8 +43,8 @@ const resolvers = {
         getAnimal: async () => {
             return await Animal.find();
         },
-        getPen: async(parent, args, context) => {
-            if(context.pen) {
+        getPen: async (parent, args, context) => {
+            if (context.pen) {
                 const foundPen = await Pen.findOne({
                     _id: context.pen._id,
                     name: context.pen.name,
@@ -55,36 +55,36 @@ const resolvers = {
         },
         // }, getAllPens: async(parent, { evnironment, name }) => {
         //         const params = {};
-          
+
         //         if (evnironment) {
         //           params.evnironment = evnironment;
         //         }
-          
+
         //         if (name) {
         //           params.name = {
         //             $regex: name
         //           };
         //         }
-          
+
         //         return await Pen.find(params).populate('evnironment');
         //       },
         getAllPens: async () => {
             return await Pen.find();
-          }
+        }
     },
     Mutation: {
         // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
-        addUser: async( parent, args)=> {
+        addUser: async (parent, args) => {
             const user = await User.create(args);
             const token = signToken(user);
-           return { token, user };
+            return { token, user };
         },
         // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
         // {body} is destructured req.body
-        login: async (parent,args ) => {
-            const user = await User.findOne({ email: args.email});
+        login: async (parent, args) => {
+            const user = await User.findOne({ email: args.email });
             if (!user) {
-                 throw AuthenticationError;
+                throw AuthenticationError;
             }
 
             const correctPw = await user.isCorrectPassword(args.password);
@@ -95,9 +95,26 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-  
-    }
+        addEnvironment: async (parent, { pen }, context) => {
+            if (context.user) {
+                const environment = new Environment({ pen });
+                await User.findByIdAndUpdate(context.user._id, { $push: { environment: environment } });
 
+                return environment;
+            }
+            throw AuthenticationError;
+        },
+        updatePen: async (parent, { unlocked }) => {
+            const increment = Math.abs(quantity) * +1;
+      
+            return await Animal.findByIdAndUpdate(_id, { $inc: { quantity: increment } }, { new: true });
+          },
+        updateAnimal: async (parent, { _id, quantity }) => {
+            const increment = Math.abs(quantity) * +1;
+      
+            return await Animal.findByIdAndUpdate(_id, { $inc: { quantity: increment } }, { new: true });
+          },
+    },
 };
 
 
