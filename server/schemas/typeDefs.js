@@ -6,6 +6,7 @@ const typeDefs = `
     currency: Int
     unlockedPens: [Pen]
     unlockedAnimals: [Animal]
+    unlockedEnvironments: [Environment]
   }
 
   type Pen {
