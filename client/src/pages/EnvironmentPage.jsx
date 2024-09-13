@@ -20,6 +20,30 @@ const environments = {
       { name: 'Ostriches', cost: 2000, earnings: 12, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 1500 },
     ],
   },
+  3: {
+    name: 'Arctic',
+    pens: [
+      { name: 'Penguins', cost: 100, earnings: 2, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 0 },
+      { name: 'Sea Lions', cost: 500, earnings: 7, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 400 },
+      { name: 'Polar Bears', cost: 2000, earnings: 12, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 1500 },
+    ],
+  },
+  4: {
+    name: 'Savanna',
+    pens: [
+      { name: 'Zebras', cost: 100, earnings: 2, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 0 },
+      { name: 'Elephants', cost: 500, earnings: 7, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 400 },
+      { name: 'Lions', cost: 2000, earnings: 12, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 1500 },
+    ],
+  },
+  5: {
+    name: 'Marine',
+    pens: [
+      { name: 'Dolphins', cost: 100, earnings: 2, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 0 },
+      { name: 'Sharks', cost: 500, earnings: 7, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 400 },
+      { name: 'Blue Whales', cost: 2000, earnings: 12, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 1500 },
+    ],
+  },
   // Other environments...
 };
 
@@ -134,6 +158,21 @@ const EnvironmentPage = () => {
       {id === '2' && (
         <Button color="blue" onClick={() => setMoney(money + 5)}>
           Click to earn $5 from the Avian Environment
+        </Button>
+      )}
+      {id === '3' && (
+        <Button color="blue" onClick={() => setMoney(money + 10)}>
+          Click to earn $10 from the Arctic Environment
+        </Button>
+      )}
+      {id === '4' && (
+        <Button color="blue" onClick={() => setMoney(money + 50)}>
+          Click to earn $50 from the Savanna Environment
+        </Button>
+      )}
+      {id === '5' && (
+        <Button color="blue" onClick={() => setMoney(money + 100)}>
+          Click to earn $100 from the Marine Environment
         </Button>
       )}
 
