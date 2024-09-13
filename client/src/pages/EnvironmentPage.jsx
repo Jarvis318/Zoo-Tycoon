@@ -1,23 +1,71 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Header, Button, Grid, Segment } from 'semantic-ui-react';
-import '../assets/styles.css'
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Container, Header, Button, Grid, Segment } from "semantic-ui-react";
+import "../assets/styles.css";
 // Mock data for environments using IDs as keys
 const environments = {
   1: {
-    name: 'Forest',
+    name: "Forest",
     pens: [
-      { name: 'Turtles', cost: 50, earnings: 1, maxAnimals: 4, currentAnimals: 0, unlocked: true, unlockCost: 0 },
-      { name: 'Snakes', cost: 350, earnings: 5, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 250 },
-      { name: 'Alligator', cost: 1500, earnings: 10, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 1000 },
+      {
+        name: "Turtles",
+        cost: 50,
+        earnings: 1,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: true,
+        unlockCost: 0,
+      },
+      {
+        name: "Snakes",
+        cost: 350,
+        earnings: 5,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 250,
+      },
+      {
+        name: "Alligator",
+        cost: 1500,
+        earnings: 10,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 1000,
+      },
     ],
   },
   2: {
-    name: 'Avian',
+    name: "Avian",
     pens: [
-      { name: 'Parrots', cost: 100, earnings: 2, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 0 },
-      { name: 'Flamingos', cost: 500, earnings: 7, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 400 },
-      { name: 'Ostriches', cost: 2000, earnings: 12, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 1500 },
+      {
+        name: "Parrots",
+        cost: 100,
+        earnings: 2,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 0,
+      },
+      {
+        name: "Flamingos",
+        cost: 500,
+        earnings: 7,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 400,
+      },
+      {
+        name: "Ostriches",
+        cost: 2000,
+        earnings: 12,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 1500,
+      },
     ],
   },
   // Other environments...
@@ -35,9 +83,9 @@ const EnvironmentPage = () => {
   // If environmentData is undefined, handle the invalid ID case
   if (!environmentData) {
     return (
-      <Container textAlign="center" style={{ marginTop: '2em' }}>
+      <Container textAlign="center" style={{ marginTop: "2em" }}>
         <Header as="h1">Environment Not Found</Header>
-        <Button onClick={() => navigate('/')}>Go Back to Home</Button>
+        <Button onClick={() => navigate("/")}>Go Back to Home</Button>
       </Container>
     );
   }
@@ -59,7 +107,11 @@ const EnvironmentPage = () => {
       };
       setPens(updatedPens);
     } else if (pen.currentAnimals >= pen.maxAnimals) {
-      alert("This pen is full! You can't add more than " + pen.maxAnimals + " animals.");
+      alert(
+        "This pen is full! You can't add more than " +
+          pen.maxAnimals +
+          " animals."
+      );
     } else {
       alert("Not enough money to buy this animal!");
     }
@@ -75,7 +127,6 @@ const EnvironmentPage = () => {
       updatedPens[penIndex] = {
         ...pen,
         unlocked: true, // Unlock the pen
-        
       };
       setPens(updatedPens);
     } else {
@@ -84,7 +135,7 @@ const EnvironmentPage = () => {
   };
 
   return (
-    <Container textAlign="center" style={{ marginTop: '2em' }}>
+    <Container textAlign="center" style={{ marginTop: "2em" }}>
       {/* Header for the environment */}
       <Header as="h1">{environmentData.name} Environment</Header>
       <Header as="h3">Money: ${money}</Header>
@@ -101,24 +152,28 @@ const EnvironmentPage = () => {
               {/* If the pen is unlocked, show buy animals option, otherwise show unlock option */}
               {pen.unlocked ? (
                 <>
-                  <img src='../../public/images/set/pen.png' className='pen'></img>
-                  <p>{pen.name} generates ${pen.earnings} per second</p>
+                  <img src="/images/set/Pen.png" className="pen" />
+                  {Array.from({ length: pen.currentAnimals }).map((_, idx) => (
+                    <img
+                      key={idx}
+                      src={`/images/animals/${pen.name.toLowerCase()}.gif`} // Use .gif for animated sprites
+                      alt={pen.name}
+                      className="animal-sprite"
+                    />
+                  ))}
+                  <p>
+                    {pen.name} generates ${pen.earnings} per second
+                  </p>
                   {/* Show button to buy more animals if the pen is unlocked */}
                   {pen.currentAnimals < pen.maxAnimals && (
-                    <Button
-                      color="green"
-                      onClick={() => buyAnimal(index)}
-                    >
+                    <Button color="green" onClick={() => buyAnimal(index)}>
                       Buy {pen.name} for ${pen.cost}
                     </Button>
                   )}
                 </>
               ) : (
                 // Show unlock button if the pen is locked
-                <Button
-                  color="orange"
-                  onClick={() => unlockPen(index)}
-                >
+                <Button color="orange" onClick={() => unlockPen(index)}>
                   Unlock {pen.name} Pen for ${pen.unlockCost}
                 </Button>
               )}
@@ -128,19 +183,23 @@ const EnvironmentPage = () => {
       </Grid>
 
       {/* Generate earnings per click for Environments */}
-      {id === '1' && (
+      {id === "1" && (
         <Button color="blue" onClick={() => setMoney(money + 1)}>
           Click to earn $1 from the Forest
         </Button>
       )}
-      {id === '2' && (
+      {id === "2" && (
         <Button color="blue" onClick={() => setMoney(money + 5)}>
           Click to earn $5 from the Avian Environment
         </Button>
       )}
 
       {/* Back to Environments button */}
-      <Button color="grey" style={{ marginTop: '20px' }} onClick={() => navigate('/')}>
+      <Button
+        color="grey"
+        style={{ marginTop: "20px" }}
+        onClick={() => navigate("/")}
+      >
         Back to Environments
       </Button>
     </Container>

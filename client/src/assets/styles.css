@@ -1,4 +1,11 @@
 .pen {
     image-rendering: pixelated;
-    height: 256px;
+    height: 348px;
+    width: 348px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.turtle {
+    height: auto;
 }
