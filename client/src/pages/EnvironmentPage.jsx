@@ -144,7 +144,7 @@ const EnvironmentPage = () => {
       <Grid columns={3} stackable>
         {pens.map((pen, index) => (
           <Grid.Column key={index}>
-            <Segment>
+            <Segment className="pen-segment">
               <Header as="h4">{pen.name} Pen</Header>
               <p>
                 {pen.currentAnimals}/{pen.maxAnimals} animals
@@ -152,15 +152,22 @@ const EnvironmentPage = () => {
               {/* If the pen is unlocked, show buy animals option, otherwise show unlock option */}
               {pen.unlocked ? (
                 <>
-                  <img src="/images/set/Pen.png" className="pen" />
-                  {Array.from({ length: pen.currentAnimals }).map((_, idx) => (
-                    <img
-                      key={idx}
-                      src={`/images/animals/${pen.name.toLowerCase()}.gif`} // Use .gif for animated sprites
-                      alt={pen.name}
-                      className="animal-sprite"
-                    />
-                  ))}
+                  <div className="pen-container">
+                    <img className="pen" src="/images/set/pen.png" />
+                    <div className="pen-sprites">
+                      {Array.from({ length: pen.currentAnimals }).map(
+                        (_, idx) => (
+                          <img
+                            key={idx}
+                            src={`/images/animals/${pen.name.toLowerCase()}.gif`}
+                            alt={pen.name}
+                            className={pen.name.toLowerCase()}
+                          />
+                        )
+                      )}
+                    </div>
+                  </div>
+
                   <p>
                     {pen.name} generates ${pen.earnings} per second
                   </p>
