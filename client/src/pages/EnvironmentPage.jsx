@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Header, Button, Grid, Segment } from 'semantic-ui-react';
-
+import '../assets/styles.css'
 // Mock data for environments using IDs as keys
 const environments = {
   1: {
@@ -75,6 +75,7 @@ const EnvironmentPage = () => {
       updatedPens[penIndex] = {
         ...pen,
         unlocked: true, // Unlock the pen
+        
       };
       setPens(updatedPens);
     } else {
@@ -100,6 +101,7 @@ const EnvironmentPage = () => {
               {/* If the pen is unlocked, show buy animals option, otherwise show unlock option */}
               {pen.unlocked ? (
                 <>
+                  <img src='../../public/images/set/pen.png' className='pen'></img>
                   <p>{pen.name} generates ${pen.earnings} per second</p>
                   {/* Show button to buy more animals if the pen is unlocked */}
                   {pen.currentAnimals < pen.maxAnimals && (
