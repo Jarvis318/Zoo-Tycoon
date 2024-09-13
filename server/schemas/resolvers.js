@@ -18,9 +18,7 @@ const resolvers = {
         },
         getUser: async(parent,args,context) => {
             if(context.user) {
-            const foundUser = await User.findOne({
-                _id: context.user._id
-            });
+            const foundUser = await User.findById(context.user._id).populate('unlockedPens');
 
             return foundUser
         }
@@ -34,13 +32,16 @@ const resolvers = {
                 return foundEnvironment
             }
         },
-        getAnimal: async(parent, args, context) => {
-            if(context.animal) {
-                const foundAnimal = await Animal.findOne({
-                    _id: context.animal._id
-                });
-                return foundAnimal
-            }
+        // getAnimal: async(parent, args, context) => {
+        //     if(context.animal) {
+        //         const foundAnimal = await Animal.findOne({
+        //             _id: context.animal._id
+        //         });
+        //         return foundAnimal
+        //     }
+        // },
+        getAnimal: async () => {
+            return await Animal.find();
         },
         getPen: async(parent, args, context) => {
             if(context.pen) {
@@ -51,21 +52,25 @@ const resolvers = {
                 });
                 return foundPen
             }
-        }, getAllPens: async(parent, { evnironment, name }) => {
-                const params = {};
+        },
+        // }, getAllPens: async(parent, { evnironment, name }) => {
+        //         const params = {};
           
-                if (evnironment) {
-                  params.evnironment = evnironment;
-                }
+        //         if (evnironment) {
+        //           params.evnironment = evnironment;
+        //         }
           
-                if (name) {
-                  params.name = {
-                    $regex: name
-                  };
-                }
+        //         if (name) {
+        //           params.name = {
+        //             $regex: name
+        //           };
+        //         }
           
-                return await Pen.find(params).populate('evnironment');
-              },
+        //         return await Pen.find(params).populate('evnironment');
+        //       },
+        getAllPens: async () => {
+            return await Pen.find();
+          }
     },
     Mutation: {
         // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
@@ -97,3 +102,4 @@ const resolvers = {
 
 
 
+module.exports = resolvers;
