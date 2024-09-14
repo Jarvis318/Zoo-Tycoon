@@ -177,7 +177,7 @@ const EnvironmentPage = () => {
               {pen.unlocked ? (
                 <>
                 <div className="background-container">
-                  <img className="background" src='/images/set/forest.png'/>
+                  {/* <img className="background" src='/images/set/ocean.png'/> */}
                   <div className="pen-container">
                     <img className="pen" src="/images/set/pen.png" />
                     <div id="pen-sprites">

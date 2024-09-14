@@ -55,23 +55,48 @@
     height: 64px;
 }
 
-.turtles{
+.penguins{
     image-rendering: pixelated;
     height: 64px;
 }
 
-.turtles{
+.sea{
     image-rendering: pixelated;
     height: 64px;
 }
 
-.turtles{
+.zebras{
     image-rendering: pixelated;
     height: 64px;
 }
 
+.elephants{
+    image-rendering: pixelated;
+    height: 64px;
+}
 
-.turtles{
+.bears{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.lions{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.dolphins{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.sharks{
+    image-rendering: pixelated;
+    height: 45px;
+}
+
+
+.whales{
     image-rendering: pixelated;
     height: 64px;
 }
