@@ -4,15 +4,15 @@ import { Container, Header, Grid, Segment, Button, } from 'semantic-ui-react';
 
 // Environments data, including the cost to unlock each environment
 const environmentsData = [
-  { id: 1, name: 'Forest', unlocked: true, unlockCost: 0 },
-  { id: 2, name: 'Avian', unlocked: false, unlockCost: 200 },
-  { id: 3, name: 'Arctic', unlocked: false, unlockCost: 400 },
-  { id: 4, name: 'Savanna', unlocked: false, unlockCost: 600 },
-  { id: 5, name: 'Marine', unlocked: false, unlockCost: 800 },
+  { id: 1, name: 'Swamp', unlocked: true, unlockCost: 0 },
+  { id: 2, name: 'Avian', unlocked: false, unlockCost: 200 },  // need to adjust unlock price
+  { id: 3, name: 'Arctic', unlocked: false, unlockCost: 400 },   // need to adjust unlock price
+  { id: 4, name: 'Savanna', unlocked: false, unlockCost: 600 },   // need to adjust unlock price
+  { id: 5, name: 'Marine', unlocked: false, unlockCost: 800 },   // need to adjust unlock price
 ];
 
 const HomePage = () => {
-  const [money, setMoney] = useState(1000); // Starting money
+  const [money, setMoney] = useState(1000); // Starting money (need to adjust back to $50)
   const [environments, setEnvironments] = useState(environmentsData); // Track environment unlocks
 
   // Handle unlocking an environment
