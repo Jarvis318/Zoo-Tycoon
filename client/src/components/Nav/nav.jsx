@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, Icon, Sidebar, SidebarPusher, Segment, Header, Image, MenuItem } from 'semantic-ui-react';
+import { Menu, Icon, Sidebar, SidebarPusher, Segment, MenuItem } from 'semantic-ui-react';
 import Auth from '../../utils/auth';
 
 function NavBar() {
-  const [visible, setVisible] = useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [upgradesVisible, setUpgradesVisible] = useState(false);
+  const [soundOn, setSoundOn] = useState(true);
   const navigate = useNavigate();
 
   const handleMenuClick = (path) => {
     navigate(path);
-    setVisible(false); // Hide sidebar when a menu item is clicked
+    setSidebarVisible(false); // Hide sidebar when a menu item is clicked
+  };
+
+  const handleSoundToggle = () => {
+    setSoundOn(!soundOn);
+    console.log(`Sound is ${soundOn ? 'Off' : 'On'}`);
   };
 
   return (
@@ -20,9 +27,9 @@ function NavBar() {
         animation='overlay'
         icon='labeled'
         inverted
-        onHide={() => setVisible(false)}
+        onHide={() => setSidebarVisible(false)}
         vertical
-        visible={visible}
+        visible={sidebarVisible}
         width='thin'
       >
         <MenuItem as='a' onClick={() => handleMenuClick("/")}>
@@ -50,36 +57,52 @@ function NavBar() {
             </MenuItem>
           </>
         )}
+        <MenuItem as='a' onClick={handleSoundToggle}>
+          <Icon name={soundOn ? 'volume up' : 'volume off'} />
+          {soundOn ? 'Sound On' : 'Sound Off'}
+        </MenuItem>
+      </Sidebar>
+
+      {/* Upgrades Sidebar */}
+      <Sidebar
+        as={Menu}
+        animation='overlay'
+        icon='labeled'
+        inverted
+        onHide={() => setUpgradesVisible(false)}
+        vertical
+        visible={upgradesVisible}
+        direction='right'
+        width='thin'
+      >
+        <MenuItem as='a' onClick={() => alert('Upgrade 1')}>
+          <Icon name='cogs' />
+          Upgrade 1
+        </MenuItem>
+        <MenuItem as='a' onClick={() => alert('Upgrade 2')}>
+          <Icon name='cogs' />
+          Upgrade 2
+        </MenuItem>
+        <MenuItem as='a' onClick={() => alert('Upgrade 3')}>
+          <Icon name='cogs' />
+          Upgrade 3
+        </MenuItem>
       </Sidebar>
 
       <SidebarPusher>
         <Segment basic>
           <Menu inverted fixed='top'>
-            <Menu.Item onClick={() => setVisible(!visible)}>
+            <Menu.Item onClick={() => setSidebarVisible(!sidebarVisible)}>
               <Icon name='sidebar' />
             </Menu.Item>
-            <Menu.Item header>Zoo Tycoon</Menu.Item>
+            <Menu.Item header style={{ flex: 1, textAlign: 'center' }}>
+              Zoo Tycoon
+            </Menu.Item>
             <Menu.Menu position='right'>
-              <Menu.Item as='a' onClick={() => handleMenuClick("/")}>
-                Home
+              <Menu.Item onClick={() => setUpgradesVisible(!upgradesVisible)}>
+                <Icon name='settings' />
+                Upgrades
               </Menu.Item>
-              <Menu.Item as='a' onClick={() => alert('Leaderboard')}>
-                Leaderboard
-              </Menu.Item>
-              {Auth.loggedIn() ? (
-                <Menu.Item as='a' onClick={() => Auth.logout()}>
-                  Logout
-                </Menu.Item>
-              ) : (
-                <>
-                  <Menu.Item as='a' onClick={() => handleMenuClick("/signup")}>
-                    Signup
-                  </Menu.Item>
-                  <Menu.Item as='a' onClick={() => handleMenuClick("/login")}>
-                    Login
-                  </Menu.Item>
-                </>
-              )}
             </Menu.Menu>
           </Menu>
         </Segment>
