@@ -19,6 +19,10 @@ function NavBar() {
     console.log(`Sound is ${soundOn ? 'Off' : 'On'}`);
   };
 
+  const handleLoginClick = () => {
+    navigate('/login'); // Navigate to login page
+  };
+
   return (
     <SidebarPusher>
       {/* Sidebar for mobile */}
@@ -102,6 +106,10 @@ function NavBar() {
               <Menu.Item onClick={() => setUpgradesVisible(!upgradesVisible)}>
                 <Icon name='settings' />
                 Upgrades
+              </Menu.Item>
+              <Menu.Item onClick={handleLoginClick}>
+                <Icon name='user' />
+                Login
               </Menu.Item>
             </Menu.Menu>
           </Menu>
