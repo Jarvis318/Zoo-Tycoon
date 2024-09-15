@@ -54,7 +54,7 @@ function SignupPage(props) {
           <Form.Field>
             <label htmlFor="email">Email:</label>
             <input
-              placeholder="youremail@test.com"
+              placeholder="example@email.com"
               name="email"
               type="email"
               id="email"
