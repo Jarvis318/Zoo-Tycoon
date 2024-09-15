@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, Grid, Segment, Button } from 'semantic-ui-react';
+import { Container, Header, Grid, Segment, Button, } from 'semantic-ui-react';
 
 // Environments data, including the cost to unlock each environment
 const environmentsData = [

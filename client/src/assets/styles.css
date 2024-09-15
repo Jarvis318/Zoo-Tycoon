@@ -13,6 +13,16 @@
     min-height: 256px;
 }
 
+.background-container {
+    height:100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 256px;
+}
+
 
 
 .turtles{
@@ -20,14 +30,96 @@
     height: 64px;
 }
 
+.snakes{
+    image-rendering: pixelated;
+    height: 60px;
+}
+
+.alligator{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.parrots{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.flamingos{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.ostriches{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.penguins{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.sea{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.zebras{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.elephants{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.bears{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.lions{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.dolphins{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
+.sharks{
+    image-rendering: pixelated;
+    height: 45px;
+}
+
+
+.whales{
+    image-rendering: pixelated;
+    height: 64px;
+}
+
 #pen-sprites{
     height: 100%;
     display: grid;
-    gap:10px;
+    gap:5px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr ;
 }
 
+
+
+.background {
+    image-rendering: pixelated;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 .pen {
     image-rendering: pixelated;
     position: absolute;
@@ -37,3 +129,12 @@
     height: 100%;
     object-fit: contain;
 };
+
+.hide {
+    display: none;
+}
+@media (max-width: 768px) {
+    .hide {
+      display: block;
+    }
+  }

@@ -1,6 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Header, Button, Grid, Segment } from "semantic-ui-react";
+import { Container, Header, Button, Grid, Segment, Sidebar, Radio, SidebarPusher,
+  SidebarPushable,
+  MenuItem,
+  GridColumn,
+  Checkbox,
+  Icon,
+  Image,
+  Menu,
+ } from "semantic-ui-react";
 import "../assets/styles.css";
 // Mock data for environments using IDs as keys
 const environments = {
@@ -69,30 +77,101 @@ const environments = {
     ],
   },
   3: {
-    name: 'Arctic',
+    name: "Arctic",
     pens: [
-      { name: 'Penguins', cost: 100, earnings: 2, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 0 },
-      { name: 'Sea Lions', cost: 500, earnings: 7, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 400 },
-      { name: 'Polar Bears', cost: 2000, earnings: 12, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 1500 },
+      {
+        name: "Penguins",
+        cost: 100,
+        earnings: 2,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 0,
+      },
+      {
+        name: "Sea Lions",
+        cost: 500,
+        earnings: 7,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 400,
+      },
+      {
+        name: "Polar Bears",
+        cost: 2000,
+        earnings: 12,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 1500,
+      },
     ],
   },
   4: {
-    name: 'Savanna',
+    name: "Savanna",
     pens: [
-      { name: 'Zebras', cost: 100, earnings: 2, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 0 },
-      { name: 'Elephants', cost: 500, earnings: 7, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 400 },
-      { name: 'Lions', cost: 2000, earnings: 12, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 1500 },
+      {
+        name: "Zebras",
+        cost: 100,
+        earnings: 2,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 0,
+      },
+      {
+        name: "Elephants",
+        cost: 500,
+        earnings: 7,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 400,
+      },
+      {
+        name: "Lions",
+        cost: 2000,
+        earnings: 12,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 1500,
+      },
     ],
   },
   5: {
-    name: 'Marine',
+    name: "Marine",
     pens: [
-      { name: 'Dolphins', cost: 100, earnings: 2, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 0 },
-      { name: 'Sharks', cost: 500, earnings: 7, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 400 },
-      { name: 'Blue Whales', cost: 2000, earnings: 12, maxAnimals: 4, currentAnimals: 0, unlocked: false, unlockCost: 1500 },
+      {
+        name: "Dolphins",
+        cost: 100,
+        earnings: 2,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 0,
+      },
+      {
+        name: "Sharks",
+        cost: 500,
+        earnings: 7,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 400,
+      },
+      {
+        name: "Blue Whales",
+        cost: 2000,
+        earnings: 12,
+        maxAnimals: 4,
+        currentAnimals: 0,
+        unlocked: false,
+        unlockCost: 1500,
+      },
     ],
   },
-  // Other environments...
 };
 
 const EnvironmentPage = () => {
@@ -117,6 +196,20 @@ const EnvironmentPage = () => {
   const [money, setMoney] = useState(50); // Starting with $50
   const [pens, setPens] = useState(environmentData.pens); // Pens for the current environment
 
+    // Handle passive earnings every second
+    useEffect(() => {
+      const interval = setInterval(() => {
+        let totalEarnings = 0;
+        pens.forEach((pen) => {
+          totalEarnings += pen.currentAnimals * pen.earnings; // Add the earnings of all animals in all pens
+        });
+        setMoney((prevMoney) => prevMoney + totalEarnings); // Add the earnings to the total money
+      }, 1000); // Every second
+  
+      return () => clearInterval(interval); // Clean up the interval on component unmount
+    }, [pens]);
+
+    
   // Handle buying an animal for a specific pen
   const buyAnimal = (penIndex) => {
     const pen = pens[penIndex];
@@ -158,7 +251,13 @@ const EnvironmentPage = () => {
     }
   };
 
+  // const SidebarExampleSidebar = () => {
+  //   const [visible, setVisible] = React.useState(false)
+    
   return (
+    <>
+    
+
     <Container textAlign="center" style={{ marginTop: "2em" }}>
       {/* Header for the environment */}
       <Header as="h1">{environmentData.name} Environment</Header>
@@ -176,6 +275,8 @@ const EnvironmentPage = () => {
               {/* If the pen is unlocked, show buy animals option, otherwise show unlock option */}
               {pen.unlocked ? (
                 <>
+                <div className="background-container">
+                  {/* <img className="background" src='/images/set/ocean.png'/> */}
                   <div className="pen-container">
                     <img className="pen" src="/images/set/pen.png" />
                     <div id="pen-sprites">
@@ -191,7 +292,7 @@ const EnvironmentPage = () => {
                       )}
                     </div>
                   </div>
-
+                </div>
                   <p>
                     {pen.name} generates ${pen.earnings} per second
                   </p>
@@ -215,22 +316,22 @@ const EnvironmentPage = () => {
 
       {/* Generate earnings per click for Environments */}
       {id === "1" && (
-        <Button color="blue" onClick={() => setMoney(money + 1)}>
+        <Button color="blue" onClick={() => setMoney(money + 100)}>
           Click to earn $1 from the Forest
         </Button>
       )}
       {id === "2" && (
-        <Button color="blue" onClick={() => setMoney(money + 5)}>
+        <Button color="blue" onClick={() => setMoney(money + 500)}>
           Click to earn $5 from the Avian Environment
         </Button>
       )}
       {id === '3' && (
-        <Button color="blue" onClick={() => setMoney(money + 10)}>
+        <Button color="blue" onClick={() => setMoney(money + 1000)}>
           Click to earn $10 from the Arctic Environment
         </Button>
       )}
       {id === '4' && (
-        <Button color="blue" onClick={() => setMoney(money + 50)}>
+        <Button color="blue" onClick={() => setMoney(money + 500)}>
           Click to earn $50 from the Savanna Environment
         </Button>
       )}
@@ -249,6 +350,7 @@ const EnvironmentPage = () => {
         Back to Environments
       </Button>
     </Container>
+    </>
   );
 };
 
