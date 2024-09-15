@@ -7,12 +7,16 @@ const BackgroundMusic = ({ soundOn }) => {
     if (audioRef.current) {
       audioRef.current.loop = true; // Loop the music
       audioRef.current.volume = 0.5; // Adjust volume
-      soundOn ? audioRef.current.play() : audioRef.current.pause();
+      if (soundOn) {
+        audioRef.current.play().catch(error => console.log('Error playing audio:', error));
+      } else {
+        audioRef.current.pause();
+      }
     }
   }, [soundOn]);
 
   return (
-    <audio ref={audioRef} src="/assets/zooSong.mp3" /> 
+    <audio ref={audioRef} src="/assets/zooSong.mp3" />
   );
 };
 

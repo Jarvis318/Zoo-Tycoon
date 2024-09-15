@@ -12,7 +12,7 @@ function NavBar() {
 
   const handleMenuClick = (path) => {
     navigate(path);
-    setSidebarVisible(false); // Hide sidebar when a menu is clicked
+    setSidebarVisible(false);
   };
 
   const handleSoundToggle = () => {
