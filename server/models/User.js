@@ -29,18 +29,18 @@ const userSchema = new Schema({
       ref: 'Environment',
     },
   ],
-  unlockedPens: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Pen',
-    }
-  ],
-  unlockedAnimals: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Animal',
-    }
-  ],
+  // unlockedPens: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'Pen',
+  //   }
+  // ],
+  // unlockedAnimals: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'Animal',
+  //   }
+  // ],
 });
 
 userSchema.pre('save', async function (next) {

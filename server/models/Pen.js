@@ -5,11 +5,11 @@ const penSchema = new Schema({
     type: String,
     required: true,
   },
-  environment: {
-    type: Schema.Types.ObjectId,
-    ref: 'Environment',
-    required: true,
-  },
+  // environment: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Environment',
+  //   required: true,
+  // },
   animals: [{
     type: Schema.Types.ObjectId,
     ref: 'Animal',
