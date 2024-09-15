@@ -82,7 +82,7 @@ function LoginPage() {
         </GridColumn>
       </Grid>
 
-      <Divider vertical className='divider'>Or</Divider>
+      <Divider className='hide' vertical>Or</Divider>
     </Segment>
   );
 }

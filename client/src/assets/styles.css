@@ -130,8 +130,11 @@
     object-fit: contain;
 };
 
+.hide {
+    display: none;
+}
 @media (max-width: 768px) {
-    .divider {
-      display: none;
+    .hide {
+      display: block;
     }
   }

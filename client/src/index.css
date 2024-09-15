@@ -67,6 +67,12 @@ button:focus-visible {
   }
 }
 
+@media (max-width: 768px) {
+  .hide {
+    display: none;
+  }
+}
+
 @font-face {
   font-family: 'icons';
   src: url('/fonts/icons.woff2') format('woff2'),
