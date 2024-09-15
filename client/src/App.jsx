@@ -1,5 +1,5 @@
 import './App.css'
-
+import NavBar from './components/Nav/nav.jsx';
 import { Outlet } from 'react-router-dom';
 import {
   ApolloClient,
@@ -35,7 +35,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-        <Nav />
+        <NavBar />
         <Outlet />
     </ApolloProvider>
   );
