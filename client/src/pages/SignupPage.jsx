@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/Mutation';
+import {Segment
+} from 'semantic-ui-react'
 
 function SignupPage(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -30,6 +32,7 @@ function SignupPage(props) {
   };
 
   return (
+    <Segment placeholder>
     <div className="container my-1">
       <Link to="/login">← Go to Login</Link>
 
@@ -70,6 +73,7 @@ function SignupPage(props) {
         </div>
       </form>
     </div>
+    </Segment>
   );
 }
 

@@ -129,3 +129,9 @@
     height: 100%;
     object-fit: contain;
 };
+
+@media (max-width: 768px) {
+    .divider {
+      display: none;
+    }
+  }

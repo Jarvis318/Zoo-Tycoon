@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Header, Button, Grid, Segment } from "semantic-ui-react";
+import { Container, Header, Button, Grid, Segment, Sidebar, Radio, SidebarPusher,
+  SidebarPushable,
+  MenuItem,
+  GridColumn,
+  Checkbox,
+  Icon,
+  Image,
+  Menu,
+ } from "semantic-ui-react";
 import "../assets/styles.css";
 // Mock data for environments using IDs as keys
 const environments = {
@@ -243,7 +251,13 @@ const EnvironmentPage = () => {
     }
   };
 
+  // const SidebarExampleSidebar = () => {
+  //   const [visible, setVisible] = React.useState(false)
+    
   return (
+    <>
+    
+
     <Container textAlign="center" style={{ marginTop: "2em" }}>
       {/* Header for the environment */}
       <Header as="h1">{environmentData.name} Environment</Header>
@@ -336,6 +350,7 @@ const EnvironmentPage = () => {
         Back to Environments
       </Button>
     </Container>
+    </>
   );
 };
 
