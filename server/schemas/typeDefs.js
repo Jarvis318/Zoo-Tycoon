@@ -4,14 +4,11 @@ const typeDefs = `
     username: String!
     email: String!
     currency: Int
-    unlockedPens: [Pen]
-    unlockedAnimals: [Animal]
     unlockedEnvironments: [Environment]
   }
 
   type Pen {
   name: String!
-  environment: [Environment]
   animals: [Animal]
   unlocked: Boolean
   }
@@ -24,7 +21,6 @@ const typeDefs = `
 
   type Animal {
   name: String!
-  pen: [Pen]
   quantity: Int
   unlocked: Boolean
   }
@@ -39,7 +35,7 @@ const typeDefs = `
 
   type Query {
     getUser: User
-    getEnvironment(name: String!): Environment
+    getEnvironment: [Environment]
     getAnimal: [Animal] 
     getPen(name: String!, environment: ID): Pen
     getAllPens: [Pen]
@@ -49,10 +45,10 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addEnvironment(name: String!, unlocked: Boolean): Environment
+    addEnvironment(name: String!): Environment
     addPen(name: String!, unlocked: Boolean): Pen
     updateUser(currency: Int): User
-    updateEnvironment(unlocked: Boolean): Environment
+    updateEnvironment(environment: ID): Environment
     updatePen(unlocked: Boolean): Pen
     updateAnimal(_id:ID, quantity: Int): Animal
   }

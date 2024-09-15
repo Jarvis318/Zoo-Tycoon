@@ -9,110 +9,8 @@ db.once('open', async () => {
   await cleanDB('Animal', 'animals');
   await cleanDB('User', 'users');
 
-  // Seed environments
-  const environments = await Environment.insertMany([
-    { name: 'Forest', unlocked: true },
-    { name: 'Avian', unlocked: false },
-    { name: 'Arctic', unlocked: false },
-    { name: 'Savanna', unlocked: false },
-    { name: 'Marine', unlocked: false },
-  ]);
 
-  console.log('environments seeded');
 
-  // Seed pens for the Forest and Avian environments
-  const pens = await Pen.insertMany([
-    {
-      name: 'Turtle Pen',
-      environment: environments[0]._id, // Belongs to Forest environment
-      unlocked: true,
-      animals: [], // Will add animals later
-    },
-    {
-      name: 'Snake Pen',
-      environment: environments[0]._id, // Belongs to Forest environment
-      unlocked: false,
-      animals: [],
-    },
-    {
-      name: 'Alligator Pen',
-      environment: environments[0]._id, // Belongs to Forest environment
-      unlocked: false,
-      animals: [],
-    },
-    {
-      name: 'Parrot Pen',
-      environment: environments[1]._id, // Belongs to Avian environment
-      unlocked: false,
-      animals: [],
-    },
-    {
-      name: 'Flamingo Pen',
-      environment: environments[1]._id, // Belongs to Avian environment
-      unlocked: false,
-      animals: [],
-    },
-    {
-        name: 'Ostrich Pen',
-        environment: environments[1]._id, // Belongs to Avian environment
-        unlocked: false,
-        animals: [],
-    },
-    {
-        name: 'Penguin Pen',
-        environment: environments[2]._id, // Belongs to Arctic environment
-        unlocked: false,
-        animals: [],
-    },
-    {
-        name: 'Sea Lion Pen',
-        environment: environments[2]._id, // Belongs to Arctic environment
-        unlocked: false,
-        animals: [],
-    },
-    {
-        name: 'Polar Bear Pen',
-        environment: environments[2]._id, // Belongs to Arctic environment
-        unlocked: false,
-        animals: [],
-    },
-    {
-        name: 'Zebra Pen',
-        environment: environments[3]._id, // Belongs to Savanna environment
-        unlocked: false,
-        animals: [],
-    },
-    {
-        name: 'Elephant Pen',
-        environment: environments[3]._id, // Belongs to Savanna environment
-        unlocked: false,
-        animals: [],
-    },
-    {
-        name: 'Lion Pen',
-        environment: environments[3]._id, // Belongs to Savanna environment
-        unlocked: false,
-        animals: [],
-    },
-    {
-        name: 'Dolphin Pen',
-        environment: environments[4]._id, // Belongs to Marine environment
-        unlocked: false,
-        animals: [],
-    },
-    {
-        name: 'Shark Pen',
-        environment: environments[4]._id, // Belongs to Marine environment
-        unlocked: false,
-        animals: [],
-    },
-    {
-        name: 'Blue Whale Pen',
-        environment: environments[4]._id, // Belongs to Marine environment
-        unlocked: false,
-        animals: [],
-    },
-  ]);
 
   console.log('pens seeded');
 
@@ -120,95 +18,205 @@ db.once('open', async () => {
   const animals = await Animal.insertMany([
     {
       name: 'Turtle',
-      pen: pens[0]._id, // Belongs to Turtle Pen
+      //pen: pens[0]._id, // Belongs to Turtle Pen
       quantity: 4,
       unlocked: true,
     },
     {
       name: 'Snake',
-      pen: pens[1]._id, // Belongs to Snake Pen
+      //pen: pens[1]._id, // Belongs to Snake Pen
       quantity: 0,
       unlocked: false,
     },
     {
       name: 'Alligator',
-      pen: pens[2]._id, // Belongs to Alligator Pen
+      //pen: pens[2]._id, // Belongs to Alligator Pen
       quantity: 0,
       unlocked: false,
     },
     {
       name: 'Parrot',
-      pen: pens[3]._id, // Belongs to Parrot Pen
+      //pen: pens[3]._id, // Belongs to Parrot Pen
       quantity: 0,
       unlocked: false,
     },
     {
       name: 'Flamingo',
-      pen: pens[4]._id, // Belongs to Flamingo Pen
+      //pen: pens[4]._id, // Belongs to Flamingo Pen
       quantity: 0,
       unlocked: false,
     },
     {
-        name: 'Ostrich',
-        pen: pens[5]._id, // Belongs to Ostrich Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Ostrich',
+      //pen: pens[5]._id, // Belongs to Ostrich Pen
+      quantity: 0,
+      unlocked: false,
     },
     {
-        name: 'Penguin',
-        pen: pens[6]._id, // Belongs to Penguin Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Penguin',
+      //pen: pens[6]._id, // Belongs to Penguin Pen
+      quantity: 0,
+      unlocked: false,
     },
     {
-        name: 'Sea Lion',
-        pen: pens[7]._id, // Belongs to Sea Lion Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Sea Lion',
+      //pen: pens[7]._id, // Belongs to Sea Lion Pen
+      quantity: 0,
+      unlocked: false,
     },
     {
-        name: 'Polar Bear',
-        pen: pens[8]._id, // Belongs to Polar Bear Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Polar Bear',
+      //pen: pens[8]._id, // Belongs to Polar Bear Pen
+      quantity: 0,
+      unlocked: false,
     },
     {
-        name: 'Zebra',
-        pen: pens[9]._id, // Belongs to Zebra Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Zebra',
+      //pen: pens[9]._id, // Belongs to Zebra Pen
+      quantity: 0,
+      unlocked: false,
     },
     {
-        name: 'Elephant',
-        pen: pens[10]._id, // Belongs to Elephant Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Elephant',
+      //pen: pens[10]._id, // Belongs to Elephant Pen
+      quantity: 0,
+      unlocked: false,
     },
     {
-        name: 'Lion',
-        pen: pens[11]._id, // Belongs to Lion Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Lion',
+      //pen: pens[11]._id, // Belongs to Lion Pen
+      quantity: 0,
+      unlocked: false,
     },
     {
-        name: 'Dolphin',
-        pen: pens[12]._id, // Belongs to Dolphin Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Dolphin',
+      //pen: pens[12]._id, // Belongs to Dolphin Pen
+      quantity: 0,
+      unlocked: false,
     },
     {
-        name: 'Shark',
-        pen: pens[13]._id, // Belongs to Shark Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Shark',
+      //pen: pens[13]._id, // Belongs to Shark Pen
+      quantity: 0,
+      unlocked: false,
     },
     {
-        name: 'Blue Whale',
-        pen: pens[14]._id, // Belongs to Blue Whale Pen
-        quantity: 0,
-        unlocked: false,
+      name: 'Blue Whale',
+      //pen: pens[14]._id, // Belongs to Blue Whale Pen
+      quantity: 0,
+      unlocked: false,
     },
   ]);
+
+  
+  // Seed pens for the Forest and Avian environments
+  const pens = await Pen.insertMany([
+    {
+      name: 'Turtle Pen',
+      //environment: environments[0]._id, // Belongs to Forest environment
+      unlocked: true,
+      animals: [animals[0]._id,], // Will add animals later
+    },
+    {
+      name: 'Snake Pen',
+      //environment: environments[0]._id, // Belongs to Forest environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Alligator Pen',
+      //environment: environments[0]._id, // Belongs to Forest environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Parrot Pen',
+      //environment: environments[1]._id, // Belongs to Avian environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Flamingo Pen',
+      //environment: environments[1]._id, // Belongs to Avian environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Ostrich Pen',
+      //environment: environments[1]._id, // Belongs to Avian environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Penguin Pen',
+      //environment: environments[2]._id, // Belongs to Arctic environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Sea Lion Pen',
+      //environment: environments[2]._id, // Belongs to Arctic environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Polar Bear Pen',
+      //environment: environments[2]._id, // Belongs to Arctic environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Zebra Pen',
+      //environment: environments[3]._id, // Belongs to Savanna environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Elephant Pen',
+      //environment: environments[3]._id, // Belongs to Savanna environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Lion Pen',
+      //environment: environments[3]._id, // Belongs to Savanna environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Dolphin Pen',
+      //environment: environments[4]._id, // Belongs to Marine environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Shark Pen',
+      //environment: environments[4]._id, // Belongs to Marine environment
+      unlocked: false,
+      animals: [],
+    },
+    {
+      name: 'Blue Whale Pen',
+      //environment: environments[4]._id, // Belongs to Marine environment
+      unlocked: false,
+      animals: [],
+    },
+  ]);
+
+    // Seed environments
+    const environments = await Environment.insertMany([
+      {
+        name: 'Forest',
+        unlocked: true,
+        pens: pens[0]._id,
+      },
+      { name: 'Avian', unlocked: false },
+      { name: 'Arctic', unlocked: false },
+      { name: 'Savanna', unlocked: false },
+      { name: 'Marine', unlocked: false },
+    ]);
+  
+    console.log('environments seeded');
 
   console.log('animals seeded');
 
@@ -235,8 +243,8 @@ db.once('open', async () => {
     email: 'zookeeper@testmail.com',
     password: 'password12345',
     currency: 500,
-    unlockedPens: [pens[0]._id], // Only Turtle Pen is unlocked
-    unlockedAnimals: [animals[0]._id], // Only Turtle is unlocked
+    //unlockedPens: [pens[0]._id], // Only Turtle Pen is unlocked
+    //unlockedAnimals: [animals[0]._id], // Only Turtle is unlocked
     unlockedEnvironments: [environments[0]._id], // Only Forest is unlocked
   });
 

@@ -5,10 +5,10 @@ const animalSchema = new Schema({
     type: String,
     required: true,
   },
-  pen: {
-    type: Schema.Types.ObjectId,
-    ref: 'Pen',
-  },
+  // pen: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Pen',
+  // },
   quantity: {
     type: Number,
     default: 0,

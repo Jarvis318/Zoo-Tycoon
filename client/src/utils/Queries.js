@@ -27,27 +27,11 @@ query GetUser {
 
 export const QUERY_PENS = gql`
 
-query GetPens {
-    getUser {
-      _id
-      currency
-      username
-      email
-      unlockedPens {
-        name
-        unlocked
-        animals {
-          quantity
-          unlocked
-          name
-        }
-        environment {
-          unlocked
-          name
-        }
-      }
-    }
+query GetAllPens {
+    name
+    unlocked
   }
+}
 `;
 
 export const QUERY_ENVIRONMENTS = gql`

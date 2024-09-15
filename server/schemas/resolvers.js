@@ -18,20 +18,24 @@ const resolvers = {
         // },
         getUser: async (parent, args, context) => {
             if (context.user) {
-                const foundUser = await User.findById(context.user._id).populate('unlockedPens');
+                //const foundUser = await User.findById(context.user._id).populate('unlockedPens').populate('unlockedAnimals').populate('unlockedEnvironments');
+                const foundUser = await User.findById(context.user._id).populate('unlockedEnvironments');
 
                 return foundUser
             }
             throw AuthenticationError;
         },
-        getEnvironment: async (parent, args, context) => {
-            if (context.user) {
-                const foundEnvironment = await Environment.findOne({
-                    _id: context.environment._id
-                });
-                return foundEnvironment
-            }
-        },
+        getEnvironment: async () => {
+            return await Environment.find().populate('pens');
+          },
+        // getEnvironment: async (parent, args, context) => {
+        //     if (context.user) {
+        //         const foundEnvironment = await Environment.findOne({
+        //             _id: context.environment._id
+        //         });
+        //         return foundEnvironment
+        //     }
+        // },
         // getAnimal: async(parent, args, context) => {
         //     if(context.animal) {
         //         const foundAnimal = await Animal.findOne({
@@ -95,14 +99,11 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addEnvironment: async (parent, { pen }, context) => {
-            if (context.user) {
-                const environment = new Environment({ pen });
+        addEnvironment: async (parent, { name }, context) => {
+                const environment = new Environment({ name });
                 await User.findByIdAndUpdate(context.user._id, { $push: { environment: environment } });
 
                 return environment;
-            }
-            throw AuthenticationError;
         },
         updatePen: async (parent, { unlocked }) => {
             const increment = Math.abs(quantity) * +1;
