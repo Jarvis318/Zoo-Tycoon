@@ -1,28 +1,16 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-
-query GetUser {
-    user {
+ query getUser {
       _id
       currency
       username
       email
-      unlockedPens {
-        name
-        unlocked
-        animals {
-          quantity
-          unlocked
-          name
-        }
         environment {
           unlocked
           name
         }
-      }
     }
-  }
 `;
 
 export const QUERY_PENS = gql`

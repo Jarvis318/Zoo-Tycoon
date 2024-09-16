@@ -13,34 +13,34 @@ import "../assets/styles.css";
 // Mock data for environments using IDs as keys
 const environments = {
   1: {
-    name: "Forest",
+    name: "Swamp",
     pens: [
       {
         name: "Turtles",
-        cost: 50,
+        cost: [50, 75, 113, 169],
         earnings: 1,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: true,
-        unlockCost: 0,
+        unlockCost: 0,  // need to adjust final price
       },
       {
         name: "Snakes",
-        cost: 350,
-        earnings: 5,
+        cost: [240, 360, 540, 810],
+        earnings: 3,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 250,
+        unlockCost: 200,   // need to adjust final price
       },
       {
         name: "Alligator",
-        cost: 1500,
+        cost: [1152, 1728, 2592, 3888],
         earnings: 10,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 1000,
+        unlockCost: 1000,   // need to adjust final price
       },
     ],
   },
@@ -49,30 +49,30 @@ const environments = {
     pens: [
       {
         name: "Parrots",
-        cost: 100,
-        earnings: 2,
+        cost: [5530, 8294, 12442, 18662],
+        earnings: 33,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 0,
+        unlockCost: 5000,   // need to adjust final price
       },
       {
         name: "Flamingos",
-        cost: 500,
-        earnings: 7,
+        cost: [26542, 39813, 59720, 89580],
+        earnings: 105,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 400,
+        unlockCost: 25000,   // need to adjust final price
       },
       {
         name: "Ostriches",
-        cost: 2000,
-        earnings: 12,
+        cost: [127402, 191103, 286654, 429982],
+        earnings: 336,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 1500,
+        unlockCost: 100000,   // need to adjust final price
       },
     ],
   },
@@ -81,30 +81,30 @@ const environments = {
     pens: [
       {
         name: "Penguins",
-        cost: 100,
-        earnings: 2,
+        cost: [611530, 917294, 1375941, 2063912],
+        earnings: 1074,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 0,
+        unlockCost: 550000,   // need to adjust final price
       },
       {
         name: "Sea Lions",
-        cost: 500,
-        earnings: 7,
+        cost: [2935342, 4403013, 6604519, 9906778],
+        earnings: 3436,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 400,
+        unlockCost: 2000000,   // need to adjust final price
       },
       {
         name: "Polar Bears",
-        cost: 2000,
-        earnings: 12,
+        cost: [14089640, 21134460, 31701690, 47552536],
+        earnings: 10995,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 1500,
+        unlockCost: 10000000,   // need to adjust final price
       },
     ],
   },
@@ -113,30 +113,30 @@ const environments = {
     pens: [
       {
         name: "Zebras",
-        cost: 100,
-        earnings: 2,
+        cost: [67630273, 101445410, 152168114, 228252171],
+        earnings: 35184,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 0,
+        unlockCost: 55000000,   // need to adjust final price
       },
       {
         name: "Elephants",
-        cost: 500,
-        earnings: 7,
+        cost: [324625331, 486937966, 730406949, 1095610423],
+        earnings: 112590,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 400,
+        unlockCost: 250000000,   // need to adjust final price
       },
       {
         name: "Lions",
-        cost: 2000,
-        earnings: 12,
+        cost: [1558201491, 2337302236, 3505953354, 5258930031],
+        earnings: 360288,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 1500,
+        unlockCost: 1000000000,   // need to adjust final price
       },
     ],
   },
@@ -145,30 +145,30 @@ const environments = {
     pens: [
       {
         name: "Dolphins",
-        cost: 100,
-        earnings: 2,
+        cost: [7479367155, 11219050732, 16828576099, 25242864148],
+        earnings: 1152922,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 0,
+        unlockCost: 7000000000,   // need to adjust final price
       },
       {
         name: "Sharks",
-        cost: 500,
-        earnings: 7,
+        cost: [35900962344, 53851443515, 80777165273, 121165747909],
+        earnings: 3689349,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 400,
+        unlockCost: 30000000000,   // need to adjust final price
       },
       {
         name: "Blue Whales",
-        cost: 2000,
-        earnings: 12,
+        cost: [172324619249, 258486928873, 387730393310, 581595589965],
+        earnings: 11805916,
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 1500,
+        unlockCost: 150000000000,   // need to adjust final price
       },
     ],
   },
@@ -214,9 +214,12 @@ const EnvironmentPage = () => {
   const buyAnimal = (penIndex) => {
     const pen = pens[penIndex];
 
+    // Get the cost of the next animal based on how many are already in the pen
+    const nextAnimalCost = pen.cost[pen.currentAnimals];
+
     // Check if there is room for more animals in this pen and enough money
-    if (money >= pen.cost && pen.currentAnimals < pen.maxAnimals) {
-      setMoney(money - pen.cost); // Deduct cost for the animal
+    if (pen.currentAnimals < pen.maxAnimals && money >= nextAnimalCost) {
+      setMoney(money - nextAnimalCost); // Deduct cost for the animal
       const updatedPens = [...pens];
       updatedPens[penIndex] = {
         ...pen,
@@ -261,7 +264,7 @@ const EnvironmentPage = () => {
     <Container textAlign="center" style={{ marginTop: "2em" }}>
       {/* Header for the environment */}
       <Header as="h1">{environmentData.name} Environment</Header>
-      <Header as="h3">Money: ${money}</Header>
+      <Header as="h3">Money: ${money.toLocaleString()}</Header>
 
       {/* Display the pens */}
       <Grid columns={3} stackable>
@@ -294,19 +297,19 @@ const EnvironmentPage = () => {
                   </div>
                 </div>
                   <p>
-                    {pen.name} generates ${pen.earnings} per second
+                    {pen.name} generates ${pen.earnings.toLocaleString()} per second
                   </p>
                   {/* Show button to buy more animals if the pen is unlocked */}
                   {pen.currentAnimals < pen.maxAnimals && (
                     <Button color="green" onClick={() => buyAnimal(index)}>
-                      Buy {pen.name} for ${pen.cost}
+                      Buy {pen.name} for ${pen.cost[pen.currentAnimals].toLocaleString()}
                     </Button>
                   )}
                 </>
               ) : (
                 // Show unlock button if the pen is locked
                 <Button color="orange" onClick={() => unlockPen(index)}>
-                  Unlock {pen.name} Pen for ${pen.unlockCost}
+                  Unlock {pen.name} Pen for ${pen.unlockCost.toLocaleString()}
                 </Button>
               )}
             </Segment>
@@ -316,28 +319,28 @@ const EnvironmentPage = () => {
 
       {/* Generate earnings per click for Environments */}
       {id === "1" && (
-        <Button color="blue" onClick={() => setMoney(money + 100)}>
-          Click to earn $1 from the Forest
+        <Button color="blue" onClick={() => setMoney(money + 100)}> {/*need to adjust these prices*/}
+          Click to earn $100 from the Swamp Environment
         </Button>
       )}
       {id === "2" && (
-        <Button color="blue" onClick={() => setMoney(money + 500)}>
-          Click to earn $5 from the Avian Environment
+        <Button color="blue" onClick={() => setMoney(money + 500)}> {/*need to adjust these prices*/}
+          Click to earn $500 from the Avian Environment
         </Button>
       )}
       {id === '3' && (
-        <Button color="blue" onClick={() => setMoney(money + 1000)}>
-          Click to earn $10 from the Arctic Environment
+        <Button color="blue" onClick={() => setMoney(money + 1000)}> {/*need to adjust these prices*/}
+          Click to earn $1000 from the Arctic Environment
         </Button>
       )}
       {id === '4' && (
-        <Button color="blue" onClick={() => setMoney(money + 500)}>
-          Click to earn $50 from the Savanna Environment
+        <Button color="blue" onClick={() => setMoney(money + 25000)}> {/*need to adjust these prices*/}
+          Click to earn $25000 from the Savanna Environment
         </Button>
       )}
       {id === '5' && (
-        <Button color="blue" onClick={() => setMoney(money + 100)}>
-          Click to earn $100 from the Marine Environment
+        <Button color="blue" onClick={() => setMoney(money + 1000000000)}> {/*need to adjust these prices*/}
+          Click to earn $1000000000 from the Marine Environment
         </Button>
       )}
 

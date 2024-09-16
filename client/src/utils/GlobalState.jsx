@@ -1,23 +1,23 @@
 import { createContext, useContext, useReducer } from "react";
 import { reducer } from './Reducers'
 
-const StoreContext = createContext();
-const { Provider } = StoreContext;
+const GameContext = createContext();
+const { Provider } = GameContext;
 
-const StoreProvider = ({ value = [], ...props }) => {
+const GameProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     environmentsData: [],
-    cart: [],
-    cartOpen: false,
-    categories: [],
+    //cart: [],
+    unlocked: false,
+    //categories: [],
     currentEnvironment: '',
   });
 
   return <Provider value={[state, dispatch]} {...props} />;
 };
 
-const useStoreContext = () => {
-  return useContext(StoreContext);
+const useGameContext = () => {
+  return useContext(GameContext);
 };
 
-export { StoreProvider, useStoreContext };
+export { GameProvider, useGameContext };

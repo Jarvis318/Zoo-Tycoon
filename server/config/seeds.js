@@ -206,7 +206,7 @@ db.once('open', async () => {
     // Seed environments
     const environments = await Environment.insertMany([
       {
-        name: 'Forest',
+        name: 'Swamp',
         unlocked: true,
         pens: pens[0]._id,
       },
