@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Container, Header, Grid, Segment, Button } from 'semantic-ui-react';
 import { useGameContext } from '../../utils/GlobalState';
 import { UPDATE_CURRENCY } from '../../utils/Mutation.js';
+import '../../assets/HomePage.css';  // Import the CSS file
 
 // Environments data, including the cost to unlock each environment
 const environmentsData = [
@@ -59,13 +60,14 @@ function HomePage() {
     }
 
     return (
+        <div className="homepage-background">
         <Container textAlign="center" style={{ marginTop: '2em' }}>
             <Header as="h1" content="Zoo Tycoon" />
             <Header as="h2" content="Select an Environment to Manage" />
             <Header as="h3">Money: ${money?.toLocaleString()}</Header>
 
             {/* Creating 3 columns using Semantic UI's Grid */}
-            <Grid columns={3} stackable centered>
+            <Grid columns={5} stackable centered>
                 <Grid.Row>
                     {environments.map((env, index) => (
                         <Grid.Column key={index} width={4}>
@@ -97,6 +99,7 @@ function HomePage() {
                 </Grid.Row>
             </Grid>
         </Container>
+        </div>
     );
 };
 
