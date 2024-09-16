@@ -9,6 +9,7 @@ import { Container, Header, Button, Grid, Segment, Sidebar, Radio, SidebarPusher
   Image,
   Menu,
  } from "semantic-ui-react";
+import '../assets/EnvironmentPage.css';  
 import "../assets/styles.css";
 // Mock data for environments using IDs as keys
 const environments = {
@@ -196,6 +197,8 @@ const EnvironmentPage = () => {
   const [money, setMoney] = useState(50); // Starting with $50
   const [pens, setPens] = useState(environmentData.pens); // Pens for the current environment
 
+  const backgroundImageUrl = `/images/background/${environmentData.name.toLowerCase()}.png`;
+
     // Handle passive earnings every second
     useEffect(() => {
       const interval = setInterval(() => {
@@ -259,8 +262,8 @@ const EnvironmentPage = () => {
     
   return (
     <>
-    
 
+    <div style={{ backgroundImage: `url(${backgroundImageUrl})`, backgroundSize: 'cover', height: '100vh', backgroundPosition: 'center' }}>
     <Container textAlign="center" style={{ marginTop: "2em" }}>
       {/* Header for the environment */}
       <Header as="h1">{environmentData.name} Environment</Header>
@@ -353,6 +356,7 @@ const EnvironmentPage = () => {
         Back to Environments
       </Button>
     </Container>
+    </div>
     </>
   );
 };

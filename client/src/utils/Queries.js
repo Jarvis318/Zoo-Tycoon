@@ -1,36 +1,28 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-
-query GetUser {
-    getUser {
-      _id
-      currency
-      username
-      email
-      unlockedPens {
-        name
-        unlocked
-        animals {
-          quantity
-          unlocked
-          name
-        }
-        environment {
-          unlocked
-          name
-        }
-      }
+query Query {
+  getUser {
+    _id
+    username
+    email
+    currency
+    clickAmount
+    unlockedEnvironments {
+      name
+      unlocked
     }
   }
+}
 `;
+
+
 
 export const QUERY_PENS = gql`
 
 query GetAllPens {
     name
     unlocked
-  }
 }
 `;
 
@@ -61,25 +53,12 @@ query GetEnvironment {
 
 export const QUERY_ANIMALS = gql`
 
-query GetAnimal {
-    getUser {
-      _id
-      currency
-      username
-      email
-      unlockedPens {
-        name
-        unlocked
-        animals {
-          quantity
-          unlocked
-          name
-        }
-        environment {
-          unlocked
-          name
-        }
-      }
-    }
+query Query {
+  getAnimal {
+    name
+    quantity
+    level
+    unlocked
   }
+}
 `;

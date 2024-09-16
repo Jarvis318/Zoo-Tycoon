@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../utils/Queries.js';
 import { Table, Header } from 'semantic-ui-react';
 import "../assets/styles.css";
 
 const Leaderboard = () => {
     const [leaderboardData, setLeaderboardData] = useState([]);
+    const { loading, data } = useQuery(QUERY_USER);
+    const getUser = data ?.getUser || {};
 
     return (
         <div>
@@ -28,11 +32,11 @@ const Leaderboard = () => {
                   </Table.Cell>
                 </Table.Row>
               ) : (
-                leaderboardData.map((user, index) => (
-                  <Table.Row key={user.username}>
-                    <Table.Cell>{index + 1}</Table.Cell>
-                    <Table.Cell>{user.username}</Table.Cell>
-                    <Table.Cell>${user.lifetimeEarnings.toLocaleString()}</Table.Cell>
+                leaderboardData.map((getUser, index) => (
+                  <Table.Row key={getUser.username}>
+                    <Table.Cell>{getUser + 1}</Table.Cell>
+                    <Table.Cell>{getUser.username}</Table.Cell>
+                    <Table.Cell>${getUser.currency.toLocaleString()}</Table.Cell>
                   </Table.Row>
                 ))
               )}

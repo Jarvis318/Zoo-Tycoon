@@ -1,21 +1,13 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  Menu,
-  Icon,
-  Sidebar,
-  SidebarPusher,
-  Segment,
-  MenuItem,
-} from "semantic-ui-react";
-import Auth from "/src/utils/auth";
-import BackgroundMusic from "../BackgroundMusic";
-import UpgradeItem from "./upgradeButton";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Menu, Icon, Sidebar, SidebarPusher, Segment, MenuItem } from 'semantic-ui-react';
+import Auth from '/src/utils/Auth';
+import BackgroundMusic from '../BackgroundMusic';
 
 function NavBar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [upgradesVisible, setUpgradesVisible] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
+  const [soundOn, setSoundOn] = useState(false);
   const navigate = useNavigate();
 
   const handleMenuClick = (path) => {

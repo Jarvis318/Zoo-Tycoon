@@ -2,6 +2,7 @@
 const { User, Animal, Environment, Pen } = require('../models');
 // import sign token function from auth
 const { signToken, AuthenticationError } = require('../utils/auth');
+const path= require('path')
 
 const resolvers = {
     Query: {
@@ -27,7 +28,7 @@ const resolvers = {
         },
         getEnvironment: async () => {
             return await Environment.find().populate('pens');
-          },
+        },
         // getEnvironment: async (parent, args, context) => {
         //     if (context.user) {
         //         const foundEnvironment = await Environment.findOne({
@@ -79,8 +80,15 @@ const resolvers = {
     Mutation: {
         // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
         addUser: async (parent, args) => {
-            const user = await User.create(args);
+
+
+            const user = await User.create({//sets up user with default values
+                username: args.username,
+                email: args.email,
+                password: args.password
+            });
             const token = signToken(user);
+
             return { token, user };
         },
         // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
@@ -100,21 +108,26 @@ const resolvers = {
             return { token, user };
         },
         addEnvironment: async (parent, { name }, context) => {
-                const environment = new Environment({ name });
-                await User.findByIdAndUpdate(context.user._id, { $push: { environment: environment } });
+            const environment = new Environment({ name });
+            await User.findByIdAndUpdate(context.user._id, { $push: { environment: environment } });
 
-                return environment;
+            return environment;
         },
-        updatePen: async (parent, { unlocked }) => {
+        updateCurrency: async (parent, args, context ) => {
+            const currency1 = args.currency
+
+            return await User.findByIdAndUpdate(context.user._id, { $set: { currency: currency1 }} , {new: true});
+        },
+        updatePen: async (parent, { _id }) => {
             const increment = Math.abs(quantity) * +1;
-      
+
             return await Animal.findByIdAndUpdate(_id, { $inc: { quantity: increment } }, { new: true });
-          },
+        },
         updateAnimal: async (parent, { _id, quantity }) => {
             const increment = Math.abs(quantity) * +1;
-      
+
             return await Animal.findByIdAndUpdate(_id, { $inc: { quantity: increment } }, { new: true });
-          },
+        },
     },
 };
 
