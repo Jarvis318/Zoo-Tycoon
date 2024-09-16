@@ -9,9 +9,9 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import Nav from './components/Nav';
+//import Nav from './components/Nav';
 //For when we add the global state
-//import { StoreProvider } from './utils/GlobalState';
+import { GameProvider } from './utils/GlobalState';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -35,8 +35,10 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <GameProvider>
         <NavBar />
         <Outlet />
+        </GameProvider>
     </ApolloProvider>
   );
 }

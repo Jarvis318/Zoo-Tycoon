@@ -4,7 +4,7 @@ const environmentSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
   },
   pens: [{
     type: Schema.Types.ObjectId,

@@ -12,6 +12,8 @@ export const LOGIN = gql`
 `;
 
 
+
+
 export const ADD_USER = gql`
   mutation addUser(
     $username: String!
@@ -22,6 +24,7 @@ export const ADD_USER = gql`
       username: $username
       email: $email
       password: $password
+
     ) {
       token
       user {
@@ -29,5 +32,15 @@ export const ADD_USER = gql`
       }
     }
   }
+`;
+
+export const UPDATE_CURRENCY = gql`
+mutation Mutation($currency: Int) {
+  updateCurrency(currency: $currency) {
+    _id
+    username
+    currency
+  }
+}
 `;
 

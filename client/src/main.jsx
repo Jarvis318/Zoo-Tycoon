@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import './index.css'
 
 import App from './App.jsx'
-import HomePage from './pages/HomePage.jsx'
+import Home from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import NoMatch from './pages/NoMatch.jsx'
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true, 
-        element: <HomePage />
+        element: <Home />
       }, 
       {
         path: '/login',
