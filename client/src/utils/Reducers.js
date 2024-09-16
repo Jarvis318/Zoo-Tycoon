@@ -1,4 +1,5 @@
 import {
+  UPDATE_CURRENCY,
     UPDATE_ENVIRONMENTS,
   } from './actions';
   
@@ -11,7 +12,12 @@ import {
           ...state,
           environmentsData: [...action.environmentsData],
         };
-  
+        case UPDATE_CURRENCY:
+          return {
+            ...state,
+            currency: [...action.currency],
+          };
+        
      
   
       // TODO: Add a comment describing what the default case is for

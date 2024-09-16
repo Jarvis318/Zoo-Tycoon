@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
+
 const userSchema = new Schema({
   username: {
     type: String,
@@ -21,7 +22,7 @@ const userSchema = new Schema({
   },
   currency: {
     type: Number,
-    default: 50,
+    default: 50000,
   },
   clickAmount: {
     type: Number,

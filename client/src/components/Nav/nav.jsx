@@ -7,7 +7,7 @@ import BackgroundMusic from '../BackgroundMusic';
 function NavBar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [upgradesVisible, setUpgradesVisible] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
+  const [soundOn, setSoundOn] = useState(false);
   const navigate = useNavigate();
 
   const handleMenuClick = (path) => {

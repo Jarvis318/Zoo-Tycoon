@@ -80,15 +80,15 @@ const resolvers = {
     Mutation: {
         // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
         addUser: async (parent, args) => {
+
+
             const user = await User.create({//sets up user with default values
                 username: args.username,
                 email: args.email,
-                password: args.password,
-                // unlockedEnvironments: [
-                //     { name: 'Forest', unlocked: true }
-                // ]
+                password: args.password
             });
             const token = signToken(user);
+
             return { token, user };
         },
         // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
@@ -112,6 +112,11 @@ const resolvers = {
             await User.findByIdAndUpdate(context.user._id, { $push: { environment: environment } });
 
             return environment;
+        },
+        updateCurrency: async (parent, args, context ) => {
+            const currency1 = args.currency
+
+            return await User.findByIdAndUpdate(context.user._id, { $set: { currency: currency1 }} , {new: true});
         },
         updatePen: async (parent, { _id }) => {
             const increment = Math.abs(quantity) * +1;

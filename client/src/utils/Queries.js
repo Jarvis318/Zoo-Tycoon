@@ -53,25 +53,12 @@ query GetEnvironment {
 
 export const QUERY_ANIMALS = gql`
 
-query GetAnimal {
-    getUser {
-      _id
-      currency
-      username
-      email
-      unlockedPens {
-        name
-        unlocked
-        animals {
-          quantity
-          unlocked
-          name
-        }
-        environment {
-          unlocked
-          name
-        }
-      }
-    }
+query Query {
+  getAnimal {
+    name
+    quantity
+    level
+    unlocked
   }
+}
 `;

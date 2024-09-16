@@ -7,7 +7,7 @@ const { Provider } = GameContext;
 const GameProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     environmentsData: [],
-    //cart: [],
+    currency: '',
     unlocked: false,
     //categories: [],
     currentEnvironment: '',

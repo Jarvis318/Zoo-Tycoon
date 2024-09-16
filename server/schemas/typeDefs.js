@@ -49,7 +49,7 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addEnvironment(name: String!): Environment
     addPen(name: String!, unlocked: Boolean): Pen
-    updateUser(currency: Int): User
+    updateCurrency(currency: Int): User
     updateEnvironment(environment: ID): Environment
     updatePen(unlocked: Boolean): Pen
     updateAnimal(_id:ID, quantity: Int): Animal
