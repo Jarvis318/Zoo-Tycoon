@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu, Icon, Sidebar, SidebarPusher, Segment, MenuItem } from 'semantic-ui-react';
-import Auth from '/src/utils/auth';
+import Auth from '/src/utils/Auth';
 import BackgroundMusic from '../BackgroundMusic';
 
 function NavBar() {

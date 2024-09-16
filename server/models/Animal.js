@@ -15,6 +15,10 @@ const animalSchema = new Schema({
     min: 0,
     max: 4,
   },
+  level: {
+    type: Number,
+    default: 1,
+  },
   unlocked: {
     type: Boolean,
     default: false,

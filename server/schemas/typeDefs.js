@@ -4,6 +4,7 @@ const typeDefs = `
     username: String!
     email: String!
     currency: Int
+    clickAmount: Int
     unlockedEnvironments: [Environment]
   }
 
@@ -22,6 +23,7 @@ const typeDefs = `
   type Animal {
   name: String!
   quantity: Int
+  level: Int
   unlocked: Boolean
   }
 

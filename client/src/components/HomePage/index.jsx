@@ -16,7 +16,7 @@ const environmentsData = [
 function HomePage() {
     const { data } = useQuery(QUERY_USER);
     let user;
-  
+    console.log(data)
     if (data) {
       user = data.user;
       console.log(data)

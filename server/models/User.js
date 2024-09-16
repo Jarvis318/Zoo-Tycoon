@@ -21,7 +21,11 @@ const userSchema = new Schema({
   },
   currency: {
     type: Number,
-    default: 1000,
+    default: 50,
+  },
+  clickAmount: {
+    type: Number,
+    default: 1,
   },
   unlockedEnvironments: [
     {

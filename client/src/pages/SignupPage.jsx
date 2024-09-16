@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
+import Auth from '../utils/Auth';
 import { ADD_USER } from '../utils/Mutation';
 import { Segment, Form, Button } from 'semantic-ui-react';
 

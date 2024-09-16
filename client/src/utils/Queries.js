@@ -1,17 +1,22 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
- query getUser {
-      _id
-      currency
-      username
-      email
-        environment {
-          unlocked
-          name
-        }
+query Query {
+  getUser {
+    _id
+    username
+    email
+    currency
+    clickAmount
+    unlockedEnvironments {
+      name
+      unlocked
     }
+  }
+}
 `;
+
+
 
 export const QUERY_PENS = gql`
 
