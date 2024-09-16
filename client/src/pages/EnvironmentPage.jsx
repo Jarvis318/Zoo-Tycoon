@@ -31,7 +31,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 250,   // need to adjust final price
+        unlockCost: 200,   // need to adjust final price
       },
       {
         name: "Alligator",
@@ -54,7 +54,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 0,   // need to adjust final price
+        unlockCost: 5000,   // need to adjust final price
       },
       {
         name: "Flamingos",
@@ -63,7 +63,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 400,   // need to adjust final price
+        unlockCost: 25000,   // need to adjust final price
       },
       {
         name: "Ostriches",
@@ -72,7 +72,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 1500,   // need to adjust final price
+        unlockCost: 100000,   // need to adjust final price
       },
     ],
   },
@@ -86,7 +86,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 0,   // need to adjust final price
+        unlockCost: 550000,   // need to adjust final price
       },
       {
         name: "Sea Lions",
@@ -95,7 +95,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 400,   // need to adjust final price
+        unlockCost: 2000000,   // need to adjust final price
       },
       {
         name: "Polar Bears",
@@ -104,7 +104,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 1500,   // need to adjust final price
+        unlockCost: 10000000,   // need to adjust final price
       },
     ],
   },
@@ -118,7 +118,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 0,   // need to adjust final price
+        unlockCost: 55000000,   // need to adjust final price
       },
       {
         name: "Elephants",
@@ -127,7 +127,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 400,   // need to adjust final price
+        unlockCost: 250000000,   // need to adjust final price
       },
       {
         name: "Lions",
@@ -136,7 +136,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 1500,   // need to adjust final price
+        unlockCost: 1000000000,   // need to adjust final price
       },
     ],
   },
@@ -150,7 +150,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 0,   // need to adjust final price
+        unlockCost: 7000000000,   // need to adjust final price
       },
       {
         name: "Sharks",
@@ -159,7 +159,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 400,   // need to adjust final price
+        unlockCost: 30000000000,   // need to adjust final price
       },
       {
         name: "Blue Whales",
@@ -168,7 +168,7 @@ const environments = {
         maxAnimals: 4,
         currentAnimals: 0,
         unlocked: false,
-        unlockCost: 1500,   // need to adjust final price
+        unlockCost: 150000000000,   // need to adjust final price
       },
     ],
   },
