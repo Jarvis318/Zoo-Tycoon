@@ -11,6 +11,7 @@ import SignupPage from './pages/SignupPage.jsx'
 import NoMatch from './pages/NoMatch.jsx'
 // import TitlePage from './pages/TitlePage.jsx'
 import EnvironmentPage from './pages/EnvironmentPage.jsx'
+import Leaderboard from './pages/Leaderboard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <SignupPage />
       }, 
+      {
+        path: '/leaderboard',
+        element: <Leaderboard />
+      },
       // {
       //   path: '/success',  //TODO: Change Page
       //   element: <TitlePage />
