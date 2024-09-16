@@ -39,7 +39,7 @@ function NavBar() {
             <Icon name='home' />
             Home
           </MenuItem>
-          <MenuItem as='a' onClick={() => alert('Leaderboard')}>
+          <MenuItem as='a' onClick={() => handleMenuClick('/leaderboard')}>
             <Icon name='trophy' />
             Leaderboard
           </MenuItem>
