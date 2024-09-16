@@ -17,6 +17,15 @@ function SignupPage(props) {
           username: formState.username,
           email: formState.email,
           password: formState.password,
+          currency: 1000,
+          unlockedEnvironments: [
+            { id: 1, name: 'Forest', unlocked: true },
+            { id: 2, name: 'Avian', unlocked: false },
+            { id: 3, name: 'Arctic', unlocked: false },
+            { id: 4, name: 'Savanna', unlocked: false },
+            { id: 5, name: 'Marine', unlocked: false },
+          ],
+
         },
       });
       const token = data.addUser.token;

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_USER } from '../utils/Queries.js';
 import { Link } from 'react-router-dom';
 import { Container, Header, Grid, Segment, Button, } from 'semantic-ui-react';
+import {
+  UPDATE_ENVIRONMENTS,
+} from '../utils/actions';
 
 // Environments data, including the cost to unlock each environment
 const environmentsData = [
@@ -12,13 +17,20 @@ const environmentsData = [
 ];
 
 const HomePage = () => {
+  const {data} = useQuery(QUERY_USER);
+  let user;
+
+  if (data) {
+    user=user.data;
+  }
+  console.log(data);
   const [money, setMoney] = useState(1000); // Starting money
   const [environments, setEnvironments] = useState(environmentsData); // Track environment unlocks
 
   // Handle unlocking an environment
   const unlockEnvironment = (envIndex) => {
     const environment = environments[envIndex];
-    
+
     // Check if the player has enough money to unlock the environment
     if (money >= environment.unlockCost) {
       setMoney(money - environment.unlockCost); // Deduct cost

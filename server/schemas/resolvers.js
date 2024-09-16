@@ -27,7 +27,7 @@ const resolvers = {
         },
         getEnvironment: async () => {
             return await Environment.find().populate('pens');
-          },
+        },
         // getEnvironment: async (parent, args, context) => {
         //     if (context.user) {
         //         const foundEnvironment = await Environment.findOne({
@@ -79,7 +79,14 @@ const resolvers = {
     Mutation: {
         // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
         addUser: async (parent, args) => {
-            const user = await User.create(args);
+            const user = await User.create({//sets up user with default values
+                username: args.username,
+                email: args.email,
+                password: args.password,
+                // unlockedEnvironments: [
+                //     { name: 'Forest', unlocked: true }
+                // ]
+            });
             const token = signToken(user);
             return { token, user };
         },
@@ -100,21 +107,21 @@ const resolvers = {
             return { token, user };
         },
         addEnvironment: async (parent, { name }, context) => {
-                const environment = new Environment({ name });
-                await User.findByIdAndUpdate(context.user._id, { $push: { environment: environment } });
+            const environment = new Environment({ name });
+            await User.findByIdAndUpdate(context.user._id, { $push: { environment: environment } });
 
-                return environment;
+            return environment;
         },
-        updatePen: async (parent, { unlocked }) => {
+        updatePen: async (parent, { _id }) => {
             const increment = Math.abs(quantity) * +1;
-      
+
             return await Animal.findByIdAndUpdate(_id, { $inc: { quantity: increment } }, { new: true });
-          },
+        },
         updateAnimal: async (parent, { _id, quantity }) => {
             const increment = Math.abs(quantity) * +1;
-      
+
             return await Animal.findByIdAndUpdate(_id, { $inc: { quantity: increment } }, { new: true });
-          },
+        },
     },
 };
 

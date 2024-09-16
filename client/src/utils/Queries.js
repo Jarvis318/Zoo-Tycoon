@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 export const QUERY_USER = gql`
 
 query GetUser {
-    getUser {
+    user {
       _id
       currency
       username
@@ -30,7 +30,6 @@ export const QUERY_PENS = gql`
 query GetAllPens {
     name
     unlocked
-  }
 }
 `;
 

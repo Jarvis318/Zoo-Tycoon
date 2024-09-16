@@ -22,6 +22,8 @@ export const ADD_USER = gql`
       username: $username
       email: $email
       password: $password
+      currency: $Int
+      unlockedEnvironments: [Environment]
     ) {
       token
       user {
