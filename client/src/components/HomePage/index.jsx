@@ -19,6 +19,7 @@ function HomePage() {
 
     const [state, dispatch] = useGameContext();
     const { loading, data } = useQuery(QUERY_USER);
+    const [updateCurrency] = useMutation(UPDATE_CURRENCY)
     const getUser = data?.getUser || {};
     console.log(getUser.currency)
 
@@ -41,10 +42,22 @@ function HomePage() {
     }, [getUser.currency, dispatch])
 
     // Handle unlocking an environment
-    const unlockEnvironment = (envIndex) => {
+    const unlockEnvironment = async (envIndex) => {
         const environment = environments[envIndex];
         if (money >= environment.unlockCost) {
-            setMoney(money - environment.unlockCost);
+            let newMoney = money - environment.unlockCost;
+            setMoney(newMoney);
+            try {
+                const data = await updateCurrency(
+                    {
+                        variables: {currency: newMoney}
+                    }
+                )
+                console.log(data)
+            } catch (error){
+                console.log(error)
+            }
+       
             const updatedEnvironments = [...environments];
             updatedEnvironments[envIndex] = { ...environment, unlocked: true };
             setEnvironments(updatedEnvironments);

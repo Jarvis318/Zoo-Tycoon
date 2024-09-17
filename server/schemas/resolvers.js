@@ -114,9 +114,11 @@ const resolvers = {
             return environment;
         },
         updateCurrency: async (parent, args, context ) => {
+            console.log(args, context.user,args.currency,context.user._id )
             const currency1 = args.currency
-
-            return await User.findByIdAndUpdate(context.user._id, { $set: { currency: currency1 }} , {new: true});
+            const updateUser = User.findByIdAndUpdate(context.user._id, { $set: { currency: currency1 }} , {new: true});
+            console.log(updateUser)
+            return("update",updateUser)
         },
         updatePen: async (parent, { _id }) => {
             const increment = Math.abs(quantity) * +1;
