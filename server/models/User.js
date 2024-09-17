@@ -22,7 +22,7 @@ const userSchema = new Schema({
   },
   currency: {
     type: Number,
-    default: 50000,
+    default: 5000000000,
   },
   clickAmount: {
     type: Number,

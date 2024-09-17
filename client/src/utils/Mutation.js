@@ -35,7 +35,7 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_CURRENCY = gql`
-mutation Mutation($currency: Int) {
+mutation updateCurrency($currency: Int) {
   updateCurrency(currency: $currency) {
     _id
     username
