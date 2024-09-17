@@ -216,29 +216,28 @@ const EnvironmentPage = () => {
     const interval = setInterval(() => {
       let totalEarnings = 0;
       pens.forEach((pen) => {
-        totalEarnings += pen.currentAnimals * pen.earnings; // Add the earnings of all animals in all pens
+        totalEarnings += pen.currentAnimals * pen.earnings;
       });
       setMoney((prevMoney) => prevMoney + totalEarnings);
-       // Add the earnings to the total money
-       let newMoney = getUser.currency + totalEarnings
-       //console.log(newMoney)
-      setMoney(newMoney); // Deduct cost for the animal
-      try {
-        const data =  updateCurrency(
-          {
-            variables: { currency: newMoney }
-          }
-        )
-        console.log(data)
-      } catch (error) {
-        console.log(error)
-      }
-       
-    }, 1000); // Every second
-    console.log('pen state updated', pens)
-
-    return () => clearInterval(interval); // Clean up the interval on component unmount
+      // let newMoney = getUser.currency + totalEarnings;
+      // setMoney(newMoney)
+      // try {
+      //   const data =  updateCurrency(
+      //     {
+      //       variables: { currency: newMoney }
+      //     }
+      //   )
+      //   console.log(data)
+      // } catch (error) {
+      //   console.log(error)
+      // }
+    }, 1000);
+  
+    console.log("pens state updated:", pens);
+  
+    return () => clearInterval(interval);
   }, [pens]);
+  
 
   useEffect(() => {
     // already in global store
@@ -410,18 +409,21 @@ const EnvironmentPage = () => {
           )}
           {id === "2" && (
             <Button color="blue" onClick={() => {
-              let newMoney = money + 500
-              setMoney(newMoney); 
-              try {
-                const data = updateCurrency(
-                  {
-                    variables: { currency: newMoney }
-                  }
-                )
-                console.log(data)
-              } catch (error) {
-                console.log(error)
+              async function random () {
+                let newMoney = money + 500;
+                setMoney(newMoney); 
+                try {
+                  const data = await updateCurrency(
+                    {
+                      variables: { currency: newMoney }
+                    }
+                  )
+                  console.log(data)
+                } catch (error) {
+                  console.log(error)
+                }
               }
+             random();
               
               }}> {/*need to adjust these prices*/}
               Click to earn $500 from the Avian Environment
@@ -429,19 +431,21 @@ const EnvironmentPage = () => {
           )}
           {id === '3' && (
             <Button color="blue" onClick={() => {
-              let newMoney = money + 1000
-              setMoney(newMoney); 
-              try {
-                const data = updateCurrency(
-                  {
-                    variables: { currency: newMoney }
-                  }
-                )
-                console.log(data)
-              } catch (error) {
-                console.log(error)
+              async function random () {
+                let newMoney = money + 1000;
+                setMoney(newMoney); 
+                try {
+                  const data = await updateCurrency(
+                    {
+                      variables: { currency: newMoney }
+                    }
+                  )
+                  console.log(data)
+                } catch (error) {
+                  console.log(error)
+                }
               }
-
+             random();
               
               }}> {/*need to adjust these prices*/}
               Click to earn $1000 from the Arctic Environment
@@ -449,19 +453,21 @@ const EnvironmentPage = () => {
           )}
           {id === '4' && (
             <Button color="blue" onClick=  {() => {
-              let newMoney = money + 25000
-              setMoney(newMoney); 
-              try {
-                const data = updateCurrency(
-                  {
-                    variables: { currency: newMoney }
-                  }
-                )
-                console.log(data)
-              } catch (error) {
-                console.log(error)
+              async function random () {
+                let newMoney = money + 25000;
+                setMoney(newMoney); 
+                try {
+                  const data = await updateCurrency(
+                    {
+                      variables: { currency: newMoney }
+                    }
+                  )
+                  console.log(data)
+                } catch (error) {
+                  console.log(error)
+                }
               }
-              
+             random();
               
               }}> {/*need to adjust these prices*/}
               Click to earn $25000 from the Savanna Environment
@@ -469,19 +475,21 @@ const EnvironmentPage = () => {
           )}
           {id === '5' && (
             <Button color="blue" onClick={() => {
-              let newMoney = money + 1000000000
-              setMoney(newMoney); 
-              try {
-                const data = updateCurrency(
-                  {
-                    variables: { currency: newMoney }
-                  }
-                )
-                console.log(data)
-              } catch (error) {
-                console.log(error)
+              async function random () {
+                let newMoney = money + 1000000000;
+                setMoney(newMoney); 
+                try {
+                  const data = await updateCurrency(
+                    {
+                      variables: { currency: newMoney }
+                    }
+                  )
+                  console.log(data)
+                } catch (error) {
+                  console.log(error)
+                }
               }
-              
+             random();
               }}> {/*need to adjust these prices*/}
               Click to earn $1000000000 from the Marine Environment
             </Button>
