@@ -20,6 +20,7 @@ function HomePage() {
     const [state, dispatch] = useGameContext();
     const { loading, data } = useQuery(QUERY_USER);
     const [updateCurrency] = useMutation(UPDATE_CURRENCY)
+    const [updateEnvironment] = useMutation(UPDATE_CURRENCY)
     const getUser = data?.getUser || {};
     console.log(getUser.currency)
 

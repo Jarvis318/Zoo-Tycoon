@@ -80,12 +80,23 @@ const resolvers = {
     Mutation: {
         // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
         addUser: async (parent, args) => {
-
+            const environments = await Environment.insertMany([
+                {
+                  name: 'Swamp',
+                  unlocked: true,
+                },
+                { name: 'Avian', unlocked: false },
+                { name: 'Arctic', unlocked: false },
+                { name: 'Savanna', unlocked: false },
+                { name: 'Marine', unlocked: false },
+              ]);
+              const envIds = environments.map(env => env._id)
 
             const user = await User.create({//sets up user with default values
                 username: args.username,
                 email: args.email,
-                password: args.password
+                password: args.password,
+                unlockedEnvironments: envIds
             });
             const token = signToken(user);
 
@@ -107,17 +118,32 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addEnvironment: async (parent, { name }, context) => {
-            const environment = new Environment({ name });
-            await User.findByIdAndUpdate(context.user._id, { $push: { environment: environment } });
+        updateEnvironment: async (parent, args, context) => {
+            // const environment1 = args.unlockedEnvironments
+            // await User.findByIdAndUpdate(context.user._id, { $set: { unlockedEnvironments: environment1 }}, {new: true});
 
-            return environment;
+            // return environment1;
+            if (context.user) {
+                try {
+                    const updatedUser = await User.findOneAndUpdate(
+                        { _id: context.user._id },
+                        { $set: { unlockedEnvironments: args.EnvironmentInput } },
+                        { new: true, runValidators: true }
+                    );
+                    return updatedUser;
+                } catch (err) {
+                    console.log(err);
+                    return err
+                }
+
+            }
+            throw AuthenticationError;
         },
         updateCurrency: async (parent, args, context ) => {
-            console.log(args, context.user,args.currency,context.user._id )
+            //console.log(args, context.user,args.currency,context.user._id )
             const currency1 = args.currency
             const updateUser = User.findByIdAndUpdate(context.user._id, { $set: { currency: currency1 }} , {new: true});
-            console.log(updateUser)
+            //console.log(updateUser)
             return("update",updateUser)
         },
         updatePen: async (parent, { _id }) => {

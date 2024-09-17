@@ -34,6 +34,10 @@ const typeDefs = `
   }
 
 
+  input EnvironmentData {
+  unlocked: Boolean
+  }
+
 
   type Query {
     getUser: User
@@ -47,10 +51,9 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addEnvironment(name: String!): Environment
     addPen(name: String!, unlocked: Boolean): Pen
     updateCurrency(currency: Int): User
-    updateEnvironment(environment: ID): Environment
+    updateEnvironment(EnvironmentInput: EnvironmentData): User
     updatePen(unlocked: Boolean): Pen
     updateAnimal(_id:ID, quantity: Int): Animal
   }
