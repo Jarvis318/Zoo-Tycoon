@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Header, Button, Grid, Segment, Sidebar, Radio, SidebarPusher,
+import {
+  Container, Header, Button, Grid, Segment, Sidebar, Radio, SidebarPusher,
   SidebarPushable,
   MenuItem,
   GridColumn,
@@ -8,9 +9,13 @@ import { Container, Header, Button, Grid, Segment, Sidebar, Radio, SidebarPusher
   Icon,
   Image,
   Menu,
- } from "semantic-ui-react";
-import '../assets/EnvironmentPage.css';  
+} from "semantic-ui-react";
+import '../assets/EnvironmentPage.css';
 import "../assets/styles.css";
+import { UPDATE_CURRENCY } from '../utils/Mutation.js';
+import { useGameContext } from '../utils/GlobalState';
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_USER } from '../utils/Queries.js';
 // Mock data for environments using IDs as keys
 const environments = {
   1: {
@@ -178,6 +183,13 @@ const environments = {
 const EnvironmentPage = () => {
   const { id } = useParams(); // Get the environment ID from the URL
   const navigate = useNavigate(); // For redirecting to another page
+  const [state, dispatch] = useGameContext();
+  const { loading, data } = useQuery(QUERY_USER);
+  const [updateCurrency] = useMutation(UPDATE_CURRENCY)
+  const getUser = data?.getUser || {};
+  console.log(getUser.currency)
+  let prevMoney = ''
+
 
   const environmentData = environments[id]; // Check if the ID exists in environments
 
@@ -194,27 +206,52 @@ const EnvironmentPage = () => {
     );
   }
 
-  const [money, setMoney] = useState(50); // Starting with $50
+  const [money, setMoney] = useState(getUser.currency || 50);// Starting with $50
   const [pens, setPens] = useState(environmentData.pens); // Pens for the current environment
 
   const backgroundImageUrl = `/images/background/${environmentData.name.toLowerCase()}.png`;
 
-    // Handle passive earnings every second
-    useEffect(() => {
-      const interval = setInterval(() => {
-        let totalEarnings = 0;
-        pens.forEach((pen) => {
-          totalEarnings += pen.currentAnimals * pen.earnings; // Add the earnings of all animals in all pens
-        });
-        setMoney((prevMoney) => prevMoney + totalEarnings); // Add the earnings to the total money
-      }, 1000); // Every second
-  
-      return () => clearInterval(interval); // Clean up the interval on component unmount
-    }, [pens]);
+  // Handle passive earnings every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let totalEarnings = 0;
+      pens.forEach((pen) => {
+        totalEarnings += pen.currentAnimals * pen.earnings; // Add the earnings of all animals in all pens
+      });
+      setMoney((prevMoney) => prevMoney + totalEarnings);
+       // Add the earnings to the total money
+       let newMoney = getUser.currency + totalEarnings
+       //console.log(newMoney)
+      setMoney(newMoney); // Deduct cost for the animal
+      try {
+        const data =  updateCurrency(
+          {
+            variables: { currency: newMoney }
+          }
+        )
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
+       
+    }, 1000); // Every second
 
-    
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, [pens]);
+
+  useEffect(() => {
+    // already in global store
+    console.log(money)
+    console.log(getUser.currency)
+    if (getUser.currency) { //Only when getUser is no longer null will this run.
+      setMoney(getUser.currency);
+
+      console.log(getUser.currency)
+    }
+  }, [getUser.currency, dispatch])
+
   // Handle buying an animal for a specific pen
-  const buyAnimal = (penIndex) => {
+  const buyAnimal = async (penIndex) => {
     const pen = pens[penIndex];
 
     // Get the cost of the next animal based on how many are already in the pen
@@ -222,7 +259,18 @@ const EnvironmentPage = () => {
 
     // Check if there is room for more animals in this pen and enough money
     if (pen.currentAnimals < pen.maxAnimals && money >= nextAnimalCost) {
-      setMoney(money - nextAnimalCost); // Deduct cost for the animal
+      let newMoney = money - nextAnimalCost;
+      setMoney(newMoney); // Deduct cost for the animal
+      try {
+        const data = await updateCurrency(
+          {
+            variables: { currency: newMoney }
+          }
+        )
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
       const updatedPens = [...pens];
       updatedPens[penIndex] = {
         ...pen,
@@ -232,20 +280,35 @@ const EnvironmentPage = () => {
     } else if (pen.currentAnimals >= pen.maxAnimals) {
       alert(
         "This pen is full! You can't add more than " +
-          pen.maxAnimals +
-          " animals."
+        pen.maxAnimals +
+        " animals."
       );
     } else {
       alert("Not enough money to buy this animal!");
     }
   };
+  if (loading) {
+    return null
+  }
+
 
   // Handle unlocking a pen
-  const unlockPen = (penIndex) => {
+  const unlockPen = async (penIndex) => {
     const pen = pens[penIndex];
 
     if (money >= pen.unlockCost) {
-      setMoney(money - pen.unlockCost); // Deduct cost to unlock the pen
+      let newMoney = money - pen.unlockCost;
+      setMoney(newMoney); // Deduct cost to unlock the pen
+      try {
+        const data = await updateCurrency(
+          {
+            variables: { currency: newMoney }
+          }
+        )
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
       const updatedPens = [...pens];
       updatedPens[penIndex] = {
         ...pen,
@@ -259,104 +322,104 @@ const EnvironmentPage = () => {
 
   // const SidebarExampleSidebar = () => {
   //   const [visible, setVisible] = React.useState(false)
-    
+
   return (
     <>
 
-    <div style={{ backgroundImage: `url(${backgroundImageUrl})`, backgroundSize: 'cover', height: '100vh', backgroundPosition: 'center' }}>
-    <Container textAlign="center" style={{ marginTop: "2em" }}>
-      {/* Header for the environment */}
-      <Header as="h1">{environmentData.name} Environment</Header>
-      <Header as="h3">Money: ${money.toLocaleString()}</Header>
+      <div style={{ backgroundImage: `url(${backgroundImageUrl})`, backgroundSize: 'cover', height: '100vh', backgroundPosition: 'center' }}>
+        <Container textAlign="center" style={{ marginTop: "2em" }}>
+          {/* Header for the environment */}
+          <Header as="h1">{environmentData.name} Environment</Header>
+          <Header as="h3">Money: ${money.toLocaleString()}</Header>
 
-      {/* Display the pens */}
-      <Grid columns={3} stackable>
-        {pens.map((pen, index) => (
-          <Grid.Column key={index}>
-            <Segment className="pen-segment">
-              <Header as="h4">{pen.name} Pen</Header>
-              <p>
-                {pen.currentAnimals}/{pen.maxAnimals} animals
-              </p>
-              {/* If the pen is unlocked, show buy animals option, otherwise show unlock option */}
-              {pen.unlocked ? (
-                <>
-                <div className="background-container">
-                  {/* <img className="background" src='/images/set/ocean.png'/> */}
-                  <div className="pen-container">
-                    <img className="pen" src="/images/set/pen.png" />
-                    <div id="pen-sprites">
-                      {Array.from({ length: pen.currentAnimals }).map(
-                        (_, idx) => (
-                          <img
-                            key={idx}
-                            src={`/images/animals/${pen.name.toLowerCase()}.gif`}
-                            alt={pen.name}
-                            className={pen.name.toLowerCase()}
-                          />
-                        )
-                      )}
-                    </div>
-                  </div>
-                </div>
+          {/* Display the pens */}
+          <Grid columns={3} stackable>
+            {pens.map((pen, index) => (
+              <Grid.Column key={index}>
+                <Segment className="pen-segment">
+                  <Header as="h4">{pen.name} Pen</Header>
                   <p>
-                    {pen.name} generates ${pen.earnings.toLocaleString()} per second
+                    {pen.currentAnimals}/{pen.maxAnimals} animals
                   </p>
-                  {/* Show button to buy more animals if the pen is unlocked */}
-                  {pen.currentAnimals < pen.maxAnimals && (
-                    <Button color="green" onClick={() => buyAnimal(index)}>
-                      Buy {pen.name} for ${pen.cost[pen.currentAnimals].toLocaleString()}
+                  {/* If the pen is unlocked, show buy animals option, otherwise show unlock option */}
+                  {pen.unlocked ? (
+                    <>
+                      <div className="background-container">
+                        {/* <img className="background" src='/images/set/ocean.png'/> */}
+                        <div className="pen-container">
+                          <img className="pen" src="/images/set/pen.png" />
+                          <div id="pen-sprites">
+                            {Array.from({ length: pen.currentAnimals }).map(
+                              (_, idx) => (
+                                <img
+                                  key={idx}
+                                  src={`/images/animals/${pen.name.toLowerCase()}.gif`}
+                                  alt={pen.name}
+                                  className={pen.name.toLowerCase()}
+                                />
+                              )
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <p>
+                        {pen.name} generates ${pen.earnings.toLocaleString()} per second
+                      </p>
+                      {/* Show button to buy more animals if the pen is unlocked */}
+                      {pen.currentAnimals < pen.maxAnimals && (
+                        <Button color="green" onClick={() => buyAnimal(index)}>
+                          Buy {pen.name} for ${pen.cost[pen.currentAnimals].toLocaleString()}
+                        </Button>
+                      )}
+                    </>
+                  ) : (
+                    // Show unlock button if the pen is locked
+                    <Button color="orange" onClick={() => unlockPen(index)}>
+                      Unlock {pen.name} Pen for ${pen.unlockCost.toLocaleString()}
                     </Button>
                   )}
-                </>
-              ) : (
-                // Show unlock button if the pen is locked
-                <Button color="orange" onClick={() => unlockPen(index)}>
-                  Unlock {pen.name} Pen for ${pen.unlockCost.toLocaleString()}
-                </Button>
-              )}
-            </Segment>
-          </Grid.Column>
-        ))}
-      </Grid>
+                </Segment>
+              </Grid.Column>
+            ))}
+          </Grid>
 
-      {/* Generate earnings per click for Environments */}
-      {id === "1" && (
-        <Button color="blue" onClick={() => setMoney(money + 100)}> {/*need to adjust these prices*/}
-          Click to earn $100 from the Swamp Environment
-        </Button>
-      )}
-      {id === "2" && (
-        <Button color="blue" onClick={() => setMoney(money + 500)}> {/*need to adjust these prices*/}
-          Click to earn $500 from the Avian Environment
-        </Button>
-      )}
-      {id === '3' && (
-        <Button color="blue" onClick={() => setMoney(money + 1000)}> {/*need to adjust these prices*/}
-          Click to earn $1000 from the Arctic Environment
-        </Button>
-      )}
-      {id === '4' && (
-        <Button color="blue" onClick={() => setMoney(money + 25000)}> {/*need to adjust these prices*/}
-          Click to earn $25000 from the Savanna Environment
-        </Button>
-      )}
-      {id === '5' && (
-        <Button color="blue" onClick={() => setMoney(money + 1000000000)}> {/*need to adjust these prices*/}
-          Click to earn $1000000000 from the Marine Environment
-        </Button>
-      )}
+          {/* Generate earnings per click for Environments */}
+          {id === "1" && (
+            <Button color="blue" onClick={() => setMoney(money + 100)}> {/*need to adjust these prices*/}
+              Click to earn $100 from the Swamp Environment
+            </Button>
+          )}
+          {id === "2" && (
+            <Button color="blue" onClick={() => setMoney(money + 500)}> {/*need to adjust these prices*/}
+              Click to earn $500 from the Avian Environment
+            </Button>
+          )}
+          {id === '3' && (
+            <Button color="blue" onClick={() => setMoney(money + 1000)}> {/*need to adjust these prices*/}
+              Click to earn $1000 from the Arctic Environment
+            </Button>
+          )}
+          {id === '4' && (
+            <Button color="blue" onClick={() => setMoney(money + 25000)}> {/*need to adjust these prices*/}
+              Click to earn $25000 from the Savanna Environment
+            </Button>
+          )}
+          {id === '5' && (
+            <Button color="blue" onClick={() => setMoney(money + 1000000000)}> {/*need to adjust these prices*/}
+              Click to earn $1000000000 from the Marine Environment
+            </Button>
+          )}
 
-      {/* Back to Environments button */}
-      <Button
-        color="grey"
-        style={{ marginTop: "20px" }}
-        onClick={() => navigate("/")}
-      >
-        Back to Environments
-      </Button>
-    </Container>
-    </div>
+          {/* Back to Environments button */}
+          <Button
+            color="grey"
+            style={{ marginTop: "20px" }}
+            onClick={() => navigate("/")}
+          >
+            Back to Environments
+          </Button>
+        </Container>
+      </div>
     </>
   );
 };

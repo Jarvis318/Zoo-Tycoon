@@ -237,6 +237,8 @@ db.once('open', async () => {
   await Pen.updateOne({ _id: pens[13]._id }, { $push: { animals: animals[13]._id } });
   await Pen.updateOne({ _id: pens[14]._id }, { $push: { animals: animals[14]._id } });
 
+  const envIds = environments.map(env => env._id)
+
   // Add a sample user
   const users = await User.create({
     username: 'zookeeper',
@@ -245,7 +247,7 @@ db.once('open', async () => {
     currency: 500,
     //unlockedPens: [pens[0]._id], // Only Turtle Pen is unlocked
     //unlockedAnimals: [animals[0]._id], // Only Turtle is unlocked
-    unlockedEnvironments: [environments[0]._id], // Only Forest is unlocked
+    unlockedEnvironments: envIds// [environments[0]._id], // Only Forest is unlocked
   });
 
   console.log('users seeded');
