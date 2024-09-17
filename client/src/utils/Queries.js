@@ -9,6 +9,7 @@ query Query {
     currency
     clickAmount
     unlockedEnvironments {
+      _id
       name
       unlocked
     }
@@ -42,7 +43,8 @@ query GetEnvironment {
           unlocked
           name
         }
-        environment {
+        unlockedEnvironments {
+          _id
           unlocked
           name
         }
