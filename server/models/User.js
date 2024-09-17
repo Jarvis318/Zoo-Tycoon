@@ -22,7 +22,10 @@ const userSchema = new Schema({
   },
   currency: {
     type: Number,
-    default: 999999999, //Can't go higher than this
+    default: 99999990999, //Can't go higher than this
+    get: (value) => {
+      return value? Number(value) : 0;
+    }, 
   },
   clickAmount: {
     type: Number,
@@ -59,6 +62,19 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
+
+userSchema.pre('save', async function(next) { 
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+
+  if (this.currency) { 
+    this.currency = BigInt(this.currency); 
+  } 
+  next();
+});
+
 
 const User = model('User', userSchema);
 

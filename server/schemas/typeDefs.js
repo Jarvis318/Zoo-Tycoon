@@ -3,7 +3,7 @@ const typeDefs = `
     _id: ID!
     username: String!
     email: String!
-    currency: Int
+    currency: Float
     clickAmount: Int
     unlockedEnvironments: [Environment]
   }
@@ -52,7 +52,7 @@ const typeDefs = `
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addPen(name: String!, unlocked: Boolean): Pen
-    updateCurrency(currency: Int): User
+    updateCurrency(currency: Float): User
     updateEnvironment(EnvironmentInput: EnvironmentData): User
     updatePen(unlocked: Boolean): Pen
     updateAnimal(_id:ID, quantity: Int): Animal
