@@ -216,28 +216,16 @@ const EnvironmentPage = () => {
     const interval = setInterval(() => {
       let totalEarnings = 0;
       pens.forEach((pen) => {
-        totalEarnings += pen.currentAnimals * pen.earnings; // Add the earnings of all animals in all pens
+        totalEarnings += pen.currentAnimals * pen.earnings;
       });
       setMoney((prevMoney) => prevMoney + totalEarnings);
-       // Add the earnings to the total money
-       let newMoney = getUser.currency + totalEarnings
-       //console.log(newMoney)
-      setMoney(newMoney); // Deduct cost for the animal
-      try {
-        const data =  updateCurrency(
-          {
-            variables: { currency: newMoney }
-          }
-        )
-        console.log(data)
-      } catch (error) {
-        console.log(error)
-      }
-       
-    }, 1000); // Every second
-
-    return () => clearInterval(interval); // Clean up the interval on component unmount
+    }, 1000);
+  
+    console.log("pens state updated:", pens);
+  
+    return () => clearInterval(interval);
   }, [pens]);
+  
 
   useEffect(() => {
     // already in global store

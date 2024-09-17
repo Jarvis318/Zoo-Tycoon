@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu, Icon, Sidebar, SidebarPusher, Segment, MenuItem } from 'semantic-ui-react';
 import Auth from '/src/utils/Auth';
-import BackgroundMusic from '../BackgroundMusic';
-
+import BackgroundMusic from '../BackgroundMusic'
 function NavBar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [upgradesVisible, setUpgradesVisible] = useState(false);
@@ -87,13 +86,7 @@ function NavBar() {
             className="upgrade-sidebar"
             style={{ maxHeight: "100vh", overflowY: "auto" }}
           >
-            <UpgradeItem
-              name="Click Power"
-              level={clickPower.level}
-              price={clickPower.price}
-              canAfford={clickPower.canAfford}
-              iconName="hand pointer"
-            />
+      
           </Sidebar>
         )}
 
