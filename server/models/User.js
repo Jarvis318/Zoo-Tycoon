@@ -21,8 +21,8 @@ const userSchema = new Schema({
     minlength: 5,
   },
   currency: {
-    type: BigInt,
-    default: 500000000000, //Can't go higher than this
+    type: Number,
+    default: 999999999, //Can't go higher than this
   },
   clickAmount: {
     type: Number,
