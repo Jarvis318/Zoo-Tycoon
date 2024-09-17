@@ -235,6 +235,7 @@ const EnvironmentPage = () => {
       }
        
     }, 1000); // Every second
+    console.log('pen state updated', pens)
 
     return () => clearInterval(interval); // Clean up the interval on component unmount
   }, [pens]);
@@ -385,27 +386,103 @@ const EnvironmentPage = () => {
 
           {/* Generate earnings per click for Environments */}
           {id === "1" && (
-            <Button color="blue" onClick={() => setMoney(money + 100)}> {/*need to adjust these prices*/}
+          <Button color="blue" onClick={() => {
+            async function random () {
+              let newMoney = money + 100;
+              setMoney(newMoney); 
+              try {
+                const data = await updateCurrency(
+                  {
+                    variables: { currency: newMoney }
+                  }
+                )
+                console.log(data)
+              } catch (error) {
+                console.log(error)
+              }
+            }
+           random();
+
+
+          }}> {/*need to adjust these prices*/}
               Click to earn $100 from the Swamp Environment
             </Button>
           )}
           {id === "2" && (
-            <Button color="blue" onClick={() => setMoney(money + 500)}> {/*need to adjust these prices*/}
+            <Button color="blue" onClick={() => {
+              let newMoney = money + 500
+              setMoney(newMoney); 
+              try {
+                const data = updateCurrency(
+                  {
+                    variables: { currency: newMoney }
+                  }
+                )
+                console.log(data)
+              } catch (error) {
+                console.log(error)
+              }
+              
+              }}> {/*need to adjust these prices*/}
               Click to earn $500 from the Avian Environment
             </Button>
           )}
           {id === '3' && (
-            <Button color="blue" onClick={() => setMoney(money + 1000)}> {/*need to adjust these prices*/}
+            <Button color="blue" onClick={() => {
+              let newMoney = money + 1000
+              setMoney(newMoney); 
+              try {
+                const data = updateCurrency(
+                  {
+                    variables: { currency: newMoney }
+                  }
+                )
+                console.log(data)
+              } catch (error) {
+                console.log(error)
+              }
+
+              
+              }}> {/*need to adjust these prices*/}
               Click to earn $1000 from the Arctic Environment
             </Button>
           )}
           {id === '4' && (
-            <Button color="blue" onClick={() => setMoney(money + 25000)}> {/*need to adjust these prices*/}
+            <Button color="blue" onClick=  {() => {
+              let newMoney = money + 25000
+              setMoney(newMoney); 
+              try {
+                const data = updateCurrency(
+                  {
+                    variables: { currency: newMoney }
+                  }
+                )
+                console.log(data)
+              } catch (error) {
+                console.log(error)
+              }
+              
+              
+              }}> {/*need to adjust these prices*/}
               Click to earn $25000 from the Savanna Environment
             </Button>
           )}
           {id === '5' && (
-            <Button color="blue" onClick={() => setMoney(money + 1000000000)}> {/*need to adjust these prices*/}
+            <Button color="blue" onClick={() => {
+              let newMoney = money + 1000000000
+              setMoney(newMoney); 
+              try {
+                const data = updateCurrency(
+                  {
+                    variables: { currency: newMoney }
+                  }
+                )
+                console.log(data)
+              } catch (error) {
+                console.log(error)
+              }
+              
+              }}> {/*need to adjust these prices*/}
               Click to earn $1000000000 from the Marine Environment
             </Button>
           )}
