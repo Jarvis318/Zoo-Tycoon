@@ -28,13 +28,15 @@ const typeDefs = `
   }
 
   type Environment {
-  name: String!
+  _id: ID
+  name: String
   pens: [Pen]
   unlocked: Boolean
   }
 
 
   input EnvironmentData {
+  _id: ID
   unlocked: Boolean
   }
 

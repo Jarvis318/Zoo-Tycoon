@@ -35,12 +35,34 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_CURRENCY = gql`
-mutation updateCurrency($currency: Int) {
+mutation updateCurrency($currency: Float) {
   updateCurrency(currency: $currency) {
     _id
     username
     currency
+    unlockedEnvironments {
+      _id
+      name
+      unlocked
+    }
   }
 }
 `;
 
+
+export const UPDATE_ENVIRONMENT = gql`
+mutation Mutation($environmentInput: EnvironmentData) {
+  updateEnvironment(EnvironmentInput: $environmentInput) {
+    _id
+    username
+    currency
+    unlockedEnvironments {
+      _id
+      name
+      unlocked
+    }
+    email
+    clickAmount
+  }
+}
+`;

@@ -125,12 +125,12 @@ const resolvers = {
             // return environment1;
             if (context.user) {
                 try {
-                    const updatedUser = await User.findOneAndUpdate(
-                        { _id: context.user._id },
-                        { $set: { unlockedEnvironments: args.EnvironmentInput } },
+                    const updatedUser = await Environment.findOneAndUpdate(
+                        { _id: args.EnvironmentInput._id},
+                        { $set: { unlocked: args.EnvironmentInput.unlocked } },
                         { new: true, runValidators: true }
                     );
-                    return updatedUser;
+                    return await User.findById(context.user._id).populate('unlockedEnvironments');
                 } catch (err) {
                     console.log(err);
                     return err
@@ -142,9 +142,9 @@ const resolvers = {
         updateCurrency: async (parent, args, context ) => {
             //console.log(args, context.user,args.currency,context.user._id )
             const currency1 = args.currency
-            const updateUser = User.findByIdAndUpdate(context.user._id, { $set: { currency: currency1 }} , {new: true});
+           
             //console.log(updateUser)
-            return("update",updateUser)
+            return await  User.findByIdAndUpdate(context.user._id, { $set: { currency: currency1 }} , {new: true}).populate('unlockedEnvironments');
         },
         updatePen: async (parent, { _id }) => {
             const increment = Math.abs(quantity) * +1;
