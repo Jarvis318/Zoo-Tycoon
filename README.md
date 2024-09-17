@@ -40,7 +40,7 @@ In order to save your data, you must make an account using the sign in feature. 
 ## Authors
 
 Brian Taich
-Chris Moore
+Rahul Varughese
 Jarvis Washington
 
 ##Future Development
