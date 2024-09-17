@@ -347,7 +347,7 @@ const EnvironmentPage = () => {
                       <div className="background-container">
                         {/* <img className="background" src='/images/set/ocean.png'/> */}
                         <div className="pen-container">
-                          <img className="pen" src="/images/set/pen.png" />
+                          <img className="pen" src="/images/set/penbg.png" />
                           <div id="pen-sprites">
                             {Array.from({ length: pen.currentAnimals }).map(
                               (_, idx) => (
